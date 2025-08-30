@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A. N. M. Sajedul Alam - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --matrix-green: #00FF41;
+            --dark-bg: #000000;
+            --text-color: #E0E0E0;
+            --glow-color: rgba(0, 255, 65, 0.5);
+        }
+
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .matrix-text {
+            color: var(--matrix-green);
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+        
+        .section-container {
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--matrix-green);
+            box-shadow: 0 0 15px var(--glow-color);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 4rem;
+        }
+        
+        .header-glitch {
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .header-glitch:hover {
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%,64% { transform: translate(2px,0) skew(0deg); }
+            4%,60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+
+        .type-cursor {
+            border-right: .15em solid var(--matrix-green);
+            animation: blink-caret .75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--matrix-green); }
+        }
+
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Header & Navigation -->
+    <header class="bg-black/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-xl md:text-2xl font-bold matrix-text header-glitch cursor-pointer">A. N. M. SAJEDUL ALAM</div>
+                <nav class="hidden md:flex space-x-8 text-sm">
+                    <a href="#summary" class="hover:matrix-text transition-colors">INITIATE_CONTACT</a>
+                    <a href="#experience" class="hover:matrix-text transition-colors">ACCESS_LOGS</a>
+                    <a href="#skills" class="hover:matrix-text transition-colors">LOAD_SKILLS</a>
+                    <a href="#projects" class="hover:matrix-text transition-colors">VIEW_PROJECTS</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6 matrix-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#summary" class="block py-2 px-6 text-sm hover:bg-gray-900 hover:matrix-text">INITIATE_CONTACT</a>
+            <a href="#experience" class="block py-2 px-6 text-sm hover:bg-gray-900 hover:matrix-text">ACCESS_LOGS</a>
+            <a href="#skills" class="block py-2 px-6 text-sm hover:bg-gray-900 hover:matrix-text">LOAD_SKILLS</a>
+            <a href="#projects" class="block py-2 px-6 text-sm hover:bg-gray-900 hover:matrix-text">VIEW_PROJECTS</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-24 z-10 relative">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-start">
+            <h1 id="typing-effect" class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4"><span class="type-cursor"></span></h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl">Senior AI/ML Engineer & Technical Lead with 4+ years of leadership, specializing in intelligent automation and enterprise AI deployment.</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#experience" class="bg-gray-800 border border-matrix-green text-matrix-green font-bold py-3 px-6 rounded-md hover:bg-matrix-green hover:text-black transition-all duration-300">Explore Experience Matrix</a>
+                <a href="mailto:anmsajedulalam@gmail.com" class="bg-gray-800 border border-matrix-green text-matrix-green font-bold py-3 px-6 rounded-md hover:bg-matrix-green hover:text-black transition-all duration-300">Direct Connect</a>
+            </div>
+        </section>
+        
+        <!-- Summary Section -->
+        <section id="summary" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold mb-6 matrix-text">PROFESSIONAL_SUMMARY.log</h2>
+                <p class="text-base leading-relaxed">
+                    Senior AI/ML Engineer with 4+ years of leadership experience across international and local markets including Germany, and Bangladesh. Proven track record of scaling AI teams from 2 to 9 engineers while managing $800K+ R&D budgets and generating $2M+ business value through intelligent automation and enterprise AI deployment with extensive experience in on-site team management and stakeholder collaboration across enterprise environments.
+                </p>
+                <h3 class="text-xl font-bold mt-6 mb-4 matrix-text">Key Achievements:</h3>
+                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                    <li>Led cross-functional ML teams with 95% project success rate.</li>
+                    <li>Deployed 50+ enterprise AI solutions (90%+ accuracy) in banking, logistics, surveillance, e-commerce.</li>
+                    <li>Built scalable systems processing 82 live streams across 18 locations.</li>
+                    <li>Implemented tobacco leaf SOP checker across 60+ locations with 13 ML models.</li>
+                    <li>Published peer-reviewed papers and presented at international conferences.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold mb-8 matrix-text">PROFESSIONAL_EXPERIENCE.dat</h2>
+                <div class="space-y-12">
+                    <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green animate-ping"></span>
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Jul 2023 - Jun 2025</p>
+                        <h3 class="text-xl font-bold text-white">Team Lead, ML Research Engineer II</h3>
+                        <p class="font-semibold matrix-text">Bondstein Technologies Ltd. (Runner Group) | Dhaka, Bangladesh</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Led cross-functional AI/ML team of 9 engineers with 95% project success rate.</li>
+                            <li>Managed R&D budgets for AI infrastructure and edge devices.</li>
+                            <li>Deployed AI monitoring system processing 82 live camera streams across 18 locations.</li>
+                            <li>Architected multi-modal AI systems integrating LLAVA, LLAMA, and YOLO models.</li>
+                        </ul>
+                    </div>
+                    <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Feb 2022 - Dec 2022</p>
+                        <h3 class="text-xl font-bold text-white">Lead AI Engineer</h3>
+                        <p class="font-semibold matrix-text">eaaasy (lookaround GmbH) | Munich, Germany (Remote)</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Led AI team of 5 engineers for MVP development and technical recruitment.</li>
+                            <li>Developed real-time brand logo detection using YOLOv5 (96.71% accuracy).</li>
+                            <li>Deployed ML models on AWS and GCP using Docker and CI/CD pipelines.</li>
+                        </ul>
+                    </div>
+                     <!-- Add other experiences similarly -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">TECHNICAL_SKILLS.exe</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-sm">
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Programming:</h3>
+                        <p>Python, Java, R, MATLAB, SQL, Bash</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">AI/ML Frameworks:</h3>
+                        <p>PyTorch, TensorFlow, Keras, Scikit-learn, Hugging Face, YOLO</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Computer Vision:</h3>
+                        <p>LLAVA, OpenCV, Object Detection/Tracking, Image Classification</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">NLP & LLMs:</h3>
+                        <p>BERT, GPT, spaCy, NLTK, Sentiment Analysis, LLAMA</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Cloud & MLOps:</h3>
+                        <p>AWS (EC2, SageMaker), GCP, Azure, Docker, Kubernetes, CI/CD</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Data & Analytics:</h3>
+                        <p>Pandas, NumPy, Matplotlib, Seaborn, Tableau, Power BI</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Databases:</h3>
+                        <p>PostgreSQL, MySQL, MongoDB, Redis</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Edge Computing:</h3>
+                        <p>ONNX, Model Quantization, NVIDIA Jetson</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">NOTABLE_PROJECTS.bin</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Enterprise CCTV Face Extraction</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Utilized Multi-Task Cascaded Convolutional Neural Networks (MTCNN) and OpenCV for high-accuracy face extraction from surveillance footage.</p>
+                        <a href="https://github.com/anmsajedulalam/Extracting-faces-from-cc-footage-using-Multi-Task-Cascaded-Convolutional-Neural-Networks-and-OpenCV" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Healthcare EHR Classification Pipeline</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Developed a robust pipeline for classifying patient severity states from Electronic Health Record (EHR) data using ML and Deep Learning.</p>
+                        <a href="https://github.com/anmsajedulalam/Patients-Severity-States-Classification-based-on-EHR-Data-using-Multiple-Machine-and-Deep-Learning" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Generative AI Image Systems</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Built an Img2Img generator using Stable Diffusion with Diffusers from Hugging Face, exploring advanced generative capabilities.</p>
+                        <a href="https://github.com/anmsajedulalam/Img2Img-Generator-using-Stable-Diffusion-with-Diffusers-from-Hugging-Face" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">PDF Resume Data Extraction</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Created a system for automatically parsing and extracting structured information from resumes in PDF format.</p>
+                        <a href="https://github.com/anmsajedulalam/Data-Extraction-from-PDF-files-of-Resume" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://github.com/anmsajedulalam" target="_blank" class="hover:matrix-text transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/anmsajedulalam" target="_blank" class="hover:matrix-text transition-colors">LinkedIn</a>
+                <a href="https://scholar.google.com/citations?user=CFGs02gAAAAJ" target="_blank" class="hover:matrix-text transition-colors">Google Scholar</a>
+                <a href="https://www.kaggle.com/sajiduxd" target="_blank" class="hover:matrix-text transition-colors">Kaggle</a>
+            </div>
+            <p class="text-sm">DESIGN COMPILED: <span id="compile-date"></span></p>
+            <p class="text-sm">&copy; A. N. M. SAJEDUL ALAM. CONNECTION TERMINATED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const drawMatrix = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        
+        setInterval(drawMatrix, 30);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade-in sections
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Typing Effect
+        const typingElement = document.getElementById('typing-effect');
+        const textToType = "A. N. M. Sajedul Alam";
+        let index = 0;
+        function type() {
+            if (index < textToType.length) {
+                typingElement.innerHTML = textToType.substring(0, index + 1) + '<span class="type-cursor"></span>';
+                index++;
+                setTimeout(type, 150);
+            } else {
+                 typingElement.innerHTML = textToType + '<span class="type-cursor"></span>';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // Compile Date
+        document.getElementById('compile-date').textContent = new Date().toUTCString();
+    </script>
+</body>
+</html>
+
