@@ -61,6 +61,85 @@
             62% { transform: translate(0,0) skew(5deg); }
         }
 
+        /* Interactive Name Characters */
+        .name-char {
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            transform-origin: center bottom;
+        }
+        
+        .name-char:hover {
+            transform: scale(1.3) rotate(5deg) translateY(-8px);
+            text-shadow: 
+                0 0 10px var(--matrix-green),
+                0 0 20px var(--matrix-green),
+                0 0 30px var(--matrix-green);
+            filter: brightness(1.5);
+            z-index: 10;
+        }
+        
+        .name-char.char-pulse {
+            animation: charPulse 0.6s ease-out;
+        }
+        
+        .name-char.char-shake {
+            animation: charShake 0.5s ease-out;
+        }
+        
+        .name-char.char-bounce {
+            animation: charBounce 0.8s ease-out;
+        }
+        
+        @keyframes charPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); text-shadow: 0 0 15px var(--matrix-green); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes charShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px) rotate(-2deg); }
+            75% { transform: translateX(3px) rotate(2deg); }
+        }
+        
+        @keyframes charBounce {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-12px) scale(1.1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+            75% { transform: translateY(-4px) scale(1.02); }
+        }
+        
+        /* Ripple effect for character interactions */
+        .char-ripple {
+            position: relative;
+            overflow: visible;
+        }
+        
+        .char-ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: rippleExpand 0.6s ease-out;
+        }
+        
+        @keyframes rippleExpand {
+            to {
+                width: 60px;
+                height: 60px;
+                opacity: 0;
+            }
+        }
+
         .type-cursor {
             border-right: .15em solid var(--matrix-green);
             animation: blink-caret .75s step-end infinite;
@@ -95,7 +174,9 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-x-6">
-                    <div class="text-xl md:text-2xl font-bold matrix-text header-glitch cursor-pointer">A. N. M. SAJEDUL ALAM</div>
+                    <div class="text-xl md:text-2xl font-bold matrix-text header-glitch cursor-pointer interactive-name" id="interactive-name">
+                        <span class="name-char" data-char="A">A</span><span class="name-char" data-char=".">.</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="N">N</span><span class="name-char" data-char=".">.</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="M">M</span><span class="name-char" data-char=".">.</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="S">S</span><span class="name-char" data-char="A">A</span><span class="name-char" data-char="J">J</span><span class="name-char" data-char="E">E</span><span class="name-char" data-char="D">D</span><span class="name-char" data-char="U">U</span><span class="name-char" data-char="L">L</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="A">A</span><span class="name-char" data-char="L">L</span><span class="name-char" data-char="A">A</span><span class="name-char" data-char="M">M</span>
+                    </div>
                 </div>
                 <nav class="hidden md:flex items-center space-x-4 text-xs">
                     <a href="#summary" class="hover:matrix-text transition-colors">SUMMARY</a>
@@ -213,259 +294,6 @@
 
         <!-- Experience Section -->
         <section id="experience" class="py-20 section-fade-in">
-             <div class="section-container">
-                <h2 class="text-3xl font-bold mb-8 matrix-text">PROFESSIONAL_EXPERIENCE.dat</h2>
-                <div class="space-y-12">
-                    <!-- Experience Item -->
-                    <div class="relative border-l-2 border-matrix-green pl-8">
-                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green animate-ping"></span>
-                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
-                        <p class="text-sm text-gray-400">Jul 2023 - Jun 2025</p>
-                        <h3 class="text-xl font-bold text-white">Team Lead, ML Research Engineer II</h3>
-                        <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline">Bondstein Technologies Ltd.</a> (<a href="https://www.runnerbd.com/runner-group/" target="_blank" class="hover:underline">Runner Group</a>) | Dhaka, Bangladesh</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Led cross-functional AI/ML team of 9 engineers with 95% project success rate.</li>
-                            <li>Managed R&D budgets for AI infrastructure and edge devices.</li>
-                            <li>Deployed AI monitoring system processing 82 live camera streams across 18 locations.</li>
-                            <li>Architected multi-modal AI systems integrating LLAVA, LLAMA, and YOLO models.</li>
-                        </ul>
-                    </div>
-                     <!-- Experience Item -->
-                    <div class="relative border-l-2 border-matrix-green pl-8">
-                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
-                        <p class="text-sm text-gray-400">Jan 2023 - Jun 2023</p>
-                        <h3 class="text-xl font-bold text-white">ML Research Engineer I</h3>
-                        <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline">Bondstein Technologies Ltd.</a> | Dhaka, Bangladesh</p>
-                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Built intelligent parking system achieving 95.47% number plate recognition.</li>
-                            <li>Developed Driver Monitoring System presented at BASIS SoftExpo 2023.</li>
-                            <li>Designed TV habit monitoring solution with 98.23% accuracy for consumer behavior analysis.</li>
-                        </ul>
-                    </div>
-                    <!-- Experience Item -->
-                    <div class="relative border-l-2 border-matrix-green pl-8">
-                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
-                        <p class="text-sm text-gray-400">Feb 2022 - Dec 2022</p>
-                        <h3 class="text-xl font-bold text-white">Lead AI Engineer</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline">eaaasy</a> (<a href="https://staffus.zohorecruit.eu/jobs/Careers" target="_blank" class="hover:underline">staffus GmbH</a>) | Munich, Germany (Remote)</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Led AI team of 5 engineers for MVP development and technical recruitment.</li>
-                            <li>Developed real-time brand logo detection using YOLOv5 (96.71% accuracy).</li>
-                            <li>Deployed ML models on AWS and GCP using Docker and CI/CD pipelines.</li>
-                        </ul>
-                    </div>
-                     <!-- Experience Item -->
-                    <div class="relative border-l-2 border-matrix-green pl-8">
-                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
-                        <p class="text-sm text-gray-400">Jul 2021 - Jan 2022</p>
-                        <h3 class="text-xl font-bold text-white">AI Engineer</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline">eaaasy</a> | Munich, Germany (Remote)</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Created four end-to-end recommendation systems using content-based and collaborative filtering.</li>
-                            <li>Deployed systems using Flask, Google Cloud Run, and Docker.</li>
-                        </ul>
-                    </div>
-                    <!-- Experience Item -->
-                    <div class="relative border-l-2 border-matrix-green pl-8">
-                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
-                        <p class="text-sm text-gray-400">Jan 2021 - Jun 2021</p>
-                        <h3 class="text-xl font-bold text-white">IT Project Manager & Business Intelligence Analyst</h3>
-                        <p class="font-semibold matrix-text"><a href="https://ecomclips.com/" target="_blank" class="hover:underline">Ecomclips</a> | Dhaka, Bangladesh</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Managed multi-platform e-commerce projects across Shopify and WooCommerce.</li>
-                            <li>Implemented analytics solutions using Tableau and Power BI for performance monitoring.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 section-fade-in">
-             <div class="section-container">
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">TECHNICAL_SKILLS.exe</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-sm">
-                    <div>
-                        <h3 class="font-bold text-white mb-3">Programming:</h3>
-                        <p>Python, Java, R, MATLAB, SQL, Bash</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">AI/ML Frameworks:</h3>
-                        <p>PyTorch, TensorFlow, Keras, Scikit-learn, Hugging Face, YOLO</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">Computer Vision:</h3>
-                        <p>LLAVA, OpenCV, Object Detection/Tracking, Image Classification</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">NLP & LLMs:</h3>
-                        <p>BERT, GPT, spaCy, NLTK, Sentiment Analysis, LLAMA</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">Cloud & MLOps:</h3>
-                        <p>AWS (EC2, SageMaker), GCP, Azure, Docker, Kubernetes, CI/CD</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">Data & Analytics:</h3>
-                        <p>Pandas, NumPy, Matplotlib, Seaborn, Tableau, Power BI</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">Databases:</h3>
-                        <p>PostgreSQL, MySQL, MongoDB, Redis</p>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white mb-3">Edge Computing:</h3>
-                        <p>ONNX, Model Quantization, NVIDIA Jetson</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Most Interesting Projects Section -->
-        <section id="interesting-projects" class="py-20 section-fade-in">
-            <div class="section-container">
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">MOST_INTERESTING_PROJECTS.log</h2>
-                <div class="space-y-12">
-                    <!-- Project 1 -->
-                    <div class="border border-matrix-green p-6 rounded-md">
-                        <h3 class="text-2xl font-bold text-white mb-4">Container Tracking Solution</h3>
-                        <div class="space-y-4 text-gray-300">
-                            <div>
-                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
-                                <p>Track container IDs in real-time as they are moved by stackers and trucks in a private depot, identify their floor locations for pickup and drop-off, and update a live location on a customized depot map.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
-                                <p>Set up cameras at gates and on stackers to record streams. Extracted frames to develop a custom YOLO model for real-time OCR of container IDs and movement detection. Deployed on edge devices connected via LAN, using a private network for data communication through custom APIs.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
-                                <p>Challenges included hectic on-premise deployments in a remote area, procurement of expensive edge devices, and model accuracy drops on smaller hardware. Solved by retraining models with more data, using model pruning, and arranging local accommodation for resources.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="border border-matrix-green p-6 rounded-md">
-                        <h3 class="text-2xl font-bold text-white mb-4">Portable Voice and Vision Assistant</h3>
-                        <div class="space-y-4 text-gray-300">
-                             <div>
-                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
-                                <p>Create a device to explain images through its camera and provide prompt answers by listening to voice commands. It needed functionalities like map directions, weather updates, document scanning, and book reading, primarily for visually impaired users.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
-                                <p>Utilized pretrained models from Hugging Face for vision and voice processing, deployed on an edge device. A custom API sends images to a VM for processing, and responses are sent back. Used multiple Docker containers for different APIs and a central VM for the database. Extended functionality to drones.</p>
-                            </div>
-                             <div>
-                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
-                                <p>The primary issue was internet dependency, causing slow responses. This was resolved by integrating 5G GSM support into the edge board for a faster, more reliable connection.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="border border-matrix-green p-6 rounded-md">
-                        <h3 class="text-2xl font-bold text-white mb-4">Deepfake for Wholesaler Campaign</h3>
-                        <div class="space-y-4 text-gray-300">
-                             <div>
-                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
-                                <p>A celebrity needed to record a personalized 30-minute script for over 6,000 wholesalers on a tight 4-day schedule for a nationwide campaign, an impossible task with manual recording and editing.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
-                                <p>Used GCP for Text-to-Speech generation of names, a voice cloning API to match the celebrity's specific Bangla dialect, and a lip-sync API for video generation. Scripted the process to crop and merge the generated clips into the original studio recording, automating the creation of 6,000+ personalized videos.</p>
-                            </div>
-                             <div>
-                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
-                                <p>Difficult name pronunciations and precise lip-sync timing were major hurdles. Overcame these through continuous iteration, quality monitoring by the team, and refining the video processing scripts to ensure seamless transitions.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Details of Industrial Projects Section -->
-        <section id="industrial-projects" class="py-20 section-fade-in">
-            <div class="section-container">
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">DETAILS_OF_INDUSTRIAL_PROJECTS.dat</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">AI Surveillance for Financial Institution</h3>
-                        <p class="text-gray-400 mt-2">Developed a system featuring Bangla aggressive audio detection, custom object/face recognition, and violence detection integrated with real-time notifications.</p>
-                    </div>
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Automated Lip Sync & Voice Cloning Campaign</h3>
-                        <p class="text-gray-400 mt-2">Designed and deployed a complete pipeline leveraging multiple APIs and cloud resources to deliver over 6,600 personalized, lip-synced videos for a large-scale campaign.</p>
-                    </div>
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Tobacco Leaf SOP Checker</h3>
-                        <p class="text-gray-400 mt-2">Architected a system with 13 custom classification/detection models deployed across more than 40 sites to ensure compliance with standard operating procedures.</p>
-                    </div>
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Real-Time Face Recognition Monitoring</h3>
-                        <p class="text-gray-400 mt-2">Developed a Siamese network with YOLOv8 for real-time face detection and recognition, optimized for extended operation in high-traffic environments.</p>
-                    </div>
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Predictive Analytics for Production & Network</h3>
-                        <p class="text-gray-400 mt-2">Implemented regression and ML models for production forecasting and network data analysis, delivering detailed performance reports.</p>
-                    </div>
-                     <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Human Crowd Monitoring & Smart Parking</h3>
-                        <p class="text-gray-400 mt-2">Built fusion models for crowd tracking and smart parking systems, achieving high detection accuracies of 97% and 95%, respectively.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Notable Personal Projects Section -->
-        <section id="personal-projects" class="py-20 section-fade-in">
-             <div class="section-container">
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">NOTABLE_PERSONAL_PROJECTS.bin</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Project 1 -->
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Enterprise CCTV Face Extraction</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Utilized Multi-Task Cascaded Convolutional Neural Networks (MTCNN) and OpenCV for high-accuracy face extraction from surveillance footage.</p>
-                        <a href="https://github.com/anmsajedulalam/Extracting-faces-from-cc-footage-using-Multi-Task-Cascaded-Convolutional-Neural-Networks-and-OpenCV" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Healthcare EHR Classification Pipeline</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Developed a robust pipeline for classifying patient severity states from Electronic Health Record (EHR) data using ML and Deep Learning.</p>
-                        <a href="https://github.com/anmsajedulalam/Patients-Severity-States-Classification-based-on-EHR-Data-using-Multiple-Machine-and-Deep-Learning" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">Generative AI Image Systems</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Built an Img2Img generator using Stable Diffusion with Diffusers from Hugging Face, exploring advanced generative capabilities.</p>
-                        <a href="https://github.com/anmsajedulalam/Img2Img-Generator-using-Stable-Diffusion-with-Diffusers-from-Hugging-Face" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
-                    </div>
-                    <!-- Project 4 -->
-                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
-                        <h3 class="text-xl font-bold text-white">PDF Resume Data Extraction</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Created a system for automatically parsing and extracting structured information from resumes in PDF format.</p>
-                        <a href="https://github.com/anmsajedulalam/Data-Extraction-from-PDF-files-of-Resume" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="publications" class="py-20 section-fade-in">
-             <div class="section-container">
-                <h2 class="text-3xl font-bold mb-8 matrix-text">PUBLICATIONS_ARCHIVE.dat</h2>
-                <div class="space-y-4">
-                    <p><strong class="text-white">Comparison of Multiple Machine Learning Approaches in Spam Detection</strong> - <a href="https://link.springer.com/chapter/10.1007/978-3-031-12638-3_4" target="_blank" class="matrix-text hover:underline">Springer Nature (ICACDS 2022)</a></p>
-                    <p><strong class="text-white">Implementation of Explainable AI in Mental Health Informatics</strong> - <a href="https://ieeexplore.ieee.org/document/10088765" target="_blank" class="matrix-text hover:underline">IEEE ICECE 2022</a></p>
-                    <p><strong class="text-white">Patients' Severity States Classification using ML & DL Approaches</strong> - <a href="https://arxiv.org/abs/2209.14907" target="_blank" class="matrix-text hover:underline">arXiv:2209.14907</a></p>
-                    <p><strong class="text-white">A Machine Learning Approach to Credit Default Prediction</strong> - <a href="http://dspace.bracu.ac.bd/xmlui/handle/10361/10956" target="_blank" class="matrix-text hover:underline">Undergraduate Thesis</a></p>
-                    <p><strong class="text-white">A Survey: Implementations of NFT System in Different Fields</strong> - <a href="https://arxiv.org/abs/2209.15288" target="_blank" class="matrix-text hover:underline">arXiv:2209.15288</a></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="py-20 section-fade-in">
              <div class="section-container">
                 <h2 class="text-3xl font-bold mb-8 matrix-text">EDUCATION_RECORDS.log</h2>
                 <div class="space-y-8">
@@ -774,6 +602,138 @@
             // Start matrix on load
             startMatrix();
             
+            // Interactive Name Characters
+            const nameChars = document.querySelectorAll('.name-char');
+            const animations = ['char-pulse', 'char-shake', 'char-bounce'];
+            
+            nameChars.forEach((char, index) => {
+                // Mouse enter - individual character response
+                char.addEventListener('mouseenter', function(e) {
+                    // Remove any existing animation classes
+                    this.classList.remove(...animations, 'char-ripple');
+                    
+                    // Add ripple effect
+                    this.classList.add('char-ripple');
+                    
+                    // Random animation for variety
+                    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                    
+                    // Slight delay to make it feel more organic
+                    setTimeout(() => {
+                        this.classList.add(randomAnimation);
+                    }, 50);
+                    
+                    // Chain reaction - animate nearby characters with decreasing intensity
+                    const proximityRange = 2;
+                    nameChars.forEach((nearbyChar, nearbyIndex) => {
+                        const distance = Math.abs(index - nearbyIndex);
+                        if (distance > 0 && distance <= proximityRange) {
+                            setTimeout(() => {
+                                nearbyChar.style.transform = `scale(${1 + (0.1 * (proximityRange - distance))}) translateY(${-2 * (proximityRange - distance)}px)`;
+                                nearbyChar.style.textShadow = `0 0 ${5 * (proximityRange - distance)}px var(--matrix-green)`;
+                            }, distance * 100);
+                            
+                            // Reset nearby characters
+                            setTimeout(() => {
+                                nearbyChar.style.transform = '';
+                                nearbyChar.style.textShadow = '';
+                            }, 300 + (distance * 100));
+                        }
+                    });
+                });
+                
+                // Mouse leave - reset character
+                char.addEventListener('mouseleave', function() {
+                    setTimeout(() => {
+                        this.classList.remove(...animations, 'char-ripple');
+                    }, 600);
+                });
+                
+                // Click interaction - stronger effect
+                char.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove existing classes
+                    this.classList.remove(...animations, 'char-ripple');
+                    
+                    // Strong click effect
+                    this.style.transform = 'scale(1.6) rotate(360deg) translateY(-15px)';
+                    this.style.textShadow = '0 0 20px var(--matrix-green), 0 0 40px var(--matrix-green), 0 0 60px var(--matrix-green)';
+                    this.style.color = '#ffffff';
+                    
+                    // Create explosion effect for surrounding characters
+                    nameChars.forEach((explosionChar, explosionIndex) => {
+                        const distance = Math.abs(index - explosionIndex);
+                        if (distance > 0 && distance <= 4) {
+                            const force = 5 - distance;
+                            const direction = explosionIndex > index ? 1 : -1;
+                            
+                            setTimeout(() => {
+                                explosionChar.style.transform = `translateX(${direction * force * 3}px) scale(${1 + force * 0.05}) rotate(${direction * force * 2}deg)`;
+                                explosionChar.style.textShadow = `0 0 ${force * 3}px var(--matrix-green)`;
+                            }, distance * 50);
+                            
+                            // Reset explosion characters
+                            setTimeout(() => {
+                                explosionChar.style.transform = '';
+                                explosionChar.style.textShadow = '';
+                            }, 800 + (distance * 50));
+                        }
+                    });
+                    
+                    // Reset clicked character
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.textShadow = '';
+                        this.style.color = '';
+                    }, 800);
+                });
+                
+                // Mouse move within character - subtle floating effect
+                char.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    const deltaX = (e.clientX - centerX) * 0.1;
+                    const deltaY = (e.clientY - centerY) * 0.1;
+                    
+                    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.1)`;
+                });
+            });
+            
+            // Global mouse tracking for additional ambient effects
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Add subtle breathing effect to characters based on global mouse position
+                nameChars.forEach((char, index) => {
+                    const rect = char.getBoundingClientRect();
+                    const charCenterX = rect.left + rect.width / 2;
+                    const charCenterY = rect.top + rect.height / 2;
+                    
+                    const distance = Math.sqrt((mouseX - charCenterX) ** 2 + (mouseY - charCenterY) ** 2);
+                    const maxDistance = 200;
+                    
+                    if (distance < maxDistance) {
+                        const intensity = 1 - (distance / maxDistance);
+                        const glowIntensity = intensity * 10;
+                        
+                        if (!char.matches(':hover')) {
+                            char.style.textShadow = `0 0 ${glowIntensity}px var(--matrix-green)`;
+                            char.style.filter = `brightness(${1 + intensity * 0.3})`;
+                        }
+                    } else {
+                        if (!char.matches(':hover')) {
+                            char.style.textShadow = '';
+                            char.style.filter = '';
+                        }
+                    }
+                });
+            });
+            
             // Toggle Buttons
             const matrixToggleButton = document.getElementById('matrix-toggle');
             const mobileMatrixToggleButton = document.getElementById('mobile-matrix-toggle');
@@ -894,4 +854,257 @@
         });
     </script>
 </body>
-</html>
+</html> matrix-text">PROFESSIONAL_EXPERIENCE.dat</h2>
+                <div class="space-y-12">
+                    <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green animate-ping"></span>
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Jul 2023 - Jun 2025</p>
+                        <h3 class="text-xl font-bold text-white">Team Lead, ML Research Engineer II</h3>
+                        <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline">Bondstein Technologies Ltd.</a> (<a href="https://www.runnerbd.com/runner-group/" target="_blank" class="hover:underline">Runner Group</a>) | Dhaka, Bangladesh</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Led cross-functional AI/ML team of 9 engineers with 95% project success rate.</li>
+                            <li>Managed R&D budgets for AI infrastructure and edge devices.</li>
+                            <li>Deployed AI monitoring system processing 82 live camera streams across 18 locations.</li>
+                            <li>Architected multi-modal AI systems integrating LLAVA, LLAMA, and YOLO models.</li>
+                        </ul>
+                    </div>
+                     <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Jan 2023 - Jun 2023</p>
+                        <h3 class="text-xl font-bold text-white">ML Research Engineer I</h3>
+                        <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline">Bondstein Technologies Ltd.</a> | Dhaka, Bangladesh</p>
+                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Built intelligent parking system achieving 95.47% number plate recognition.</li>
+                            <li>Developed Driver Monitoring System presented at BASIS SoftExpo 2023.</li>
+                            <li>Designed TV habit monitoring solution with 98.23% accuracy for consumer behavior analysis.</li>
+                        </ul>
+                    </div>
+                    <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Feb 2022 - Dec 2022</p>
+                        <h3 class="text-xl font-bold text-white">Lead AI Engineer</h3>
+                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline">eaaasy</a> (<a href="https://staffus.zohorecruit.eu/jobs/Careers" target="_blank" class="hover:underline">staffus GmbH</a>) | Munich, Germany (Remote)</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Led AI team of 5 engineers for MVP development and technical recruitment.</li>
+                            <li>Developed real-time brand logo detection using YOLOv5 (96.71% accuracy).</li>
+                            <li>Deployed ML models on AWS and GCP using Docker and CI/CD pipelines.</li>
+                        </ul>
+                    </div>
+                     <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Jul 2021 - Jan 2022</p>
+                        <h3 class="text-xl font-bold text-white">AI Engineer</h3>
+                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline">eaaasy</a> | Munich, Germany (Remote)</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Created four end-to-end recommendation systems using content-based and collaborative filtering.</li>
+                            <li>Deployed systems using Flask, Google Cloud Run, and Docker.</li>
+                        </ul>
+                    </div>
+                    <!-- Experience Item -->
+                    <div class="relative border-l-2 border-matrix-green pl-8">
+                        <span class="absolute -left-2.5 top-1 h-4 w-4 rounded-full bg-matrix-green"></span>
+                        <p class="text-sm text-gray-400">Jan 2021 - Jun 2021</p>
+                        <h3 class="text-xl font-bold text-white">IT Project Manager & Business Intelligence Analyst</h3>
+                        <p class="font-semibold matrix-text"><a href="https://ecomclips.com/" target="_blank" class="hover:underline">Ecomclips</a> | Dhaka, Bangladesh</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Managed multi-platform e-commerce projects across Shopify and WooCommerce.</li>
+                            <li>Implemented analytics solutions using Tableau and Power BI for performance monitoring.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">TECHNICAL_SKILLS.exe</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-sm">
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Programming:</h3>
+                        <p>Python, Java, R, MATLAB, SQL, Bash</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">AI/ML Frameworks:</h3>
+                        <p>PyTorch, TensorFlow, Keras, Scikit-learn, Hugging Face, YOLO</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Computer Vision:</h3>
+                        <p>LLAVA, OpenCV, Object Detection/Tracking, Image Classification</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">NLP & LLMs:</h3>
+                        <p>BERT, GPT, spaCy, NLTK, Sentiment Analysis, LLAMA</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Cloud & MLOps:</h3>
+                        <p>AWS (EC2, SageMaker), GCP, Azure, Docker, Kubernetes, CI/CD</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Data & Analytics:</h3>
+                        <p>Pandas, NumPy, Matplotlib, Seaborn, Tableau, Power BI</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Databases:</h3>
+                        <p>PostgreSQL, MySQL, MongoDB, Redis</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-3">Edge Computing:</h3>
+                        <p>ONNX, Model Quantization, NVIDIA Jetson</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Most Interesting Projects Section -->
+        <section id="interesting-projects" class="py-20 section-fade-in">
+            <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">MOST_INTERESTING_PROJECTS.log</h2>
+                <div class="space-y-12">
+                    <!-- Project 1 -->
+                    <div class="border border-matrix-green p-6 rounded-md">
+                        <h3 class="text-2xl font-bold text-white mb-4">Container Tracking Solution</h3>
+                        <div class="space-y-4 text-gray-300">
+                            <div>
+                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
+                                <p>Track container IDs in real-time as they are moved by stackers and trucks in a private depot, identify their floor locations for pickup and drop-off, and update a live location on a customized depot map.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
+                                <p>Set up cameras at gates and on stackers to record streams. Extracted frames to develop a custom YOLO model for real-time OCR of container IDs and movement detection. Deployed on edge devices connected via LAN, using a private network for data communication through custom APIs.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
+                                <p>Challenges included hectic on-premise deployments in a remote area, procurement of expensive edge devices, and model accuracy drops on smaller hardware. Solved by retraining models with more data, using model pruning, and arranging local accommodation for resources.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="border border-matrix-green p-6 rounded-md">
+                        <h3 class="text-2xl font-bold text-white mb-4">Portable Voice and Vision Assistant</h3>
+                        <div class="space-y-4 text-gray-300">
+                             <div>
+                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
+                                <p>Create a device to explain images through its camera and provide prompt answers by listening to voice commands. It needed functionalities like map directions, weather updates, document scanning, and book reading, primarily for visually impaired users.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
+                                <p>Utilized pretrained models from Hugging Face for vision and voice processing, deployed on an edge device. A custom API sends images to a VM for processing, and responses are sent back. Used multiple Docker containers for different APIs and a central VM for the database. Extended functionality to drones.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
+                                <p>The primary issue was internet dependency, causing slow responses. This was resolved by integrating 5G GSM support into the edge board for a faster, more reliable connection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="border border-matrix-green p-6 rounded-md">
+                        <h3 class="text-2xl font-bold text-white mb-4">Deepfake for Wholesaler Campaign</h3>
+                        <div class="space-y-4 text-gray-300">
+                             <div>
+                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
+                                <p>A celebrity needed to record a personalized 30-minute script for over 6,000 wholesalers on a tight 4-day schedule for a nationwide campaign, an impossible task with manual recording and editing.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
+                                <p>Used GCP for Text-to-Speech generation of names, a voice cloning API to match the celebrity's specific Bangla dialect, and a lip-sync API for video generation. Scripted the process to crop and merge the generated clips into the original studio recording, automating the creation of 6,000+ personalized videos.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
+                                <p>Difficult name pronunciations and precise lip-sync timing were major hurdles. Overcame these through continuous iteration, quality monitoring by the team, and refining the video processing scripts to ensure seamless transitions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Details of Industrial Projects Section -->
+        <section id="industrial-projects" class="py-20 section-fade-in">
+            <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">DETAILS_OF_INDUSTRIAL_PROJECTS.dat</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">AI Surveillance for Financial Institution</h3>
+                        <p class="text-gray-400 mt-2">Developed a system featuring Bangla aggressive audio detection, custom object/face recognition, and violence detection integrated with real-time notifications.</p>
+                    </div>
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Automated Lip Sync & Voice Cloning Campaign</h3>
+                        <p class="text-gray-400 mt-2">Designed and deployed a complete pipeline leveraging multiple APIs and cloud resources to deliver over 6,600 personalized, lip-synced videos for a large-scale campaign.</p>
+                    </div>
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Tobacco Leaf SOP Checker</h3>
+                        <p class="text-gray-400 mt-2">Architected a system with 13 custom classification/detection models deployed across more than 40 sites to ensure compliance with standard operating procedures.</p>
+                    </div>
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Real-Time Face Recognition Monitoring</h3>
+                        <p class="text-gray-400 mt-2">Developed a Siamese network with YOLOv8 for real-time face detection and recognition, optimized for extended operation in high-traffic environments.</p>
+                    </div>
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Predictive Analytics for Production & Network</h3>
+                        <p class="text-gray-400 mt-2">Implemented regression and ML models for production forecasting and network data analysis, delivering detailed performance reports.</p>
+                    </div>
+                     <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Human Crowd Monitoring & Smart Parking</h3>
+                        <p class="text-gray-400 mt-2">Built fusion models for crowd tracking and smart parking systems, achieving high detection accuracies of 97% and 95%, respectively.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notable Personal Projects Section -->
+        <section id="personal-projects" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">NOTABLE_PERSONAL_PROJECTS.bin</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Enterprise CCTV Face Extraction</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Utilized Multi-Task Cascaded Convolutional Neural Networks (MTCNN) and OpenCV for high-accuracy face extraction from surveillance footage.</p>
+                        <a href="https://github.com/anmsajedulalam/Extracting-faces-from-cc-footage-using-Multi-Task-Cascaded-Convolutional-Neural-Networks-and-OpenCV" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Healthcare EHR Classification Pipeline</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Developed a robust pipeline for classifying patient severity states from Electronic Health Record (EHR) data using ML and Deep Learning.</p>
+                        <a href="https://github.com/anmsajedulalam/Patients-Severity-States-Classification-based-on-EHR-Data-using-Multiple-Machine-and-Deep-Learning" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">Generative AI Image Systems</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Built an Img2Img generator using Stable Diffusion with Diffusers from Hugging Face, exploring advanced generative capabilities.</p>
+                        <a href="https://github.com/anmsajedulalam/Img2Img-Generator-using-Stable-Diffusion-with-Diffusers-from-Hugging-Face" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="border border-matrix-green p-6 rounded-md hover:bg-gray-900/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white">PDF Resume Data Extraction</h3>
+                        <p class="text-gray-400 mt-2 mb-4">Created a system for automatically parsing and extracting structured information from resumes in PDF format.</p>
+                        <a href="https://github.com/anmsajedulalam/Data-Extraction-from-PDF-files-of-Resume" target="_blank" class="matrix-text hover:underline">ACCESS_SOURCE ></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold mb-8 matrix-text">PUBLICATIONS_ARCHIVE.dat</h2>
+                <div class="space-y-4">
+                    <p><strong class="text-white">Comparison of Multiple Machine Learning Approaches in Spam Detection</strong> - <a href="https://link.springer.com/chapter/10.1007/978-3-031-12638-3_4" target="_blank" class="matrix-text hover:underline">Springer Nature (ICACDS 2022)</a></p>
+                    <p><strong class="text-white">Implementation of Explainable AI in Mental Health Informatics</strong> - <a href="https://ieeexplore.ieee.org/document/10088765" target="_blank" class="matrix-text hover:underline">IEEE ICECE 2022</a></p>
+                    <p><strong class="text-white">Patients' Severity States Classification using ML & DL Approaches</strong> - <a href="https://arxiv.org/abs/2209.14907" target="_blank" class="matrix-text hover:underline">arXiv:2209.14907</a></p>
+                    <p><strong class="text-white">A Machine Learning Approach to Credit Default Prediction</strong> - <a href="http://dspace.bracu.ac.bd/xmlui/handle/10361/10956" target="_blank" class="matrix-text hover:underline">Undergraduate Thesis</a></p>
+                    <p><strong class="text-white">A Survey: Implementations of NFT System in Different Fields</strong> - <a href="https://arxiv.org/abs/2209.15288" target="_blank" class="matrix-text hover:underline">arXiv:2209.15288</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 section-fade-in">
+             <div class="section-container">
+                <h2 class="text-3xl font-bold mb-8
