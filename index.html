@@ -521,7 +521,7 @@
     </footer>
 
     <script>
-        // Matrix Rain Effect
+        // Matrix Rain Effect with Enhanced Mouse Interaction
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -539,19 +539,29 @@
         let particles = [];
         let animationFrameId;
         
-        // --- settings ---
+        // Matrix effect toggle
         let matrixEffectEnabled = true;
 
-        // Mouse object for interaction
+        // Enhanced mouse interaction with proper cursor position calculation
         const mouse = {
             x: undefined,
             y: undefined,
-            radius: 80 // The radius of the repulsion field
+            radius: 120 // Larger repulsion field for more dramatic effect
         };
 
+        // Get canvas position relative to viewport for accurate cursor tracking
+        function getCanvasMousePos(event) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+        }
+
         window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y;
+            const pos = getCanvasMousePos(event);
+            mouse.x = pos.x;
+            mouse.y = pos.y;
         });
         
         window.addEventListener('mouseout', function() {
@@ -559,8 +569,7 @@
             mouse.y = undefined;
         });
 
-
-        // Particle class
+        // Enhanced Particle class with stronger repulsion and smoother motion
         class Particle {
             constructor(x, y, fontSize, canvasHeight) {
                 this.x = x;
@@ -568,53 +577,78 @@
                 this.fontSize = fontSize;
                 this.canvasHeight = canvasHeight;
                 this.baseX = this.x; // Original x position to return to
+                this.offsetX = 0; // Current offset from base position
+                this.velocityX = 0; // Horizontal velocity for smooth movement
                 this.text = '';
-                this.speed = Math.random() * 1.5 + 0.5;
+                // Slower, more cinematic falling speed (0.3 to 1.2 instead of 0.5 to 2.0)
+                this.speed = Math.random() * 0.9 + 0.3;
+                this.opacity = Math.random() * 0.5 + 0.5; // Varying opacity for depth
                 this.setRandomChar();
             }
             
             setRandomChar(){
-                 this.text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                this.text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
             }
 
             draw(context) {
-                context.fillStyle = '#00FF41';
+                // Apply opacity for more realistic depth effect
+                context.fillStyle = `rgba(0, 255, 65, ${this.opacity})`;
                 context.font = this.fontSize + 'px monospace';
                 context.fillText(this.text, this.x, this.y * this.fontSize);
             }
 
             update() {
-                // Main downward movement
+                // Main downward movement (slower and more cinematic)
                 this.y += this.speed;
 
                 // Reset particle if it goes off screen
                 if (this.y * this.fontSize > this.canvasHeight) {
                     this.y = 0;
+                    this.x = this.baseX; // Reset to original column
+                    this.offsetX = 0;
+                    this.velocityX = 0;
                     this.setRandomChar();
+                    // Randomize opacity on reset
+                    this.opacity = Math.random() * 0.5 + 0.5;
                 }
 
-                // Mouse repulsion logic
+                // Enhanced mouse repulsion with stronger force
                 if (mouse.x !== undefined && mouse.y !== undefined) {
                     let dx = this.x - mouse.x;
                     let dy = (this.y * this.fontSize) - mouse.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < mouse.radius) {
+                        // Calculate stronger repulsion force
                         const forceDirectionX = dx / distance;
-                        const forceDirectionY = dy / distance;
-                        const force = (mouse.radius - distance) / mouse.radius;
-                        const directionX = forceDirectionX * force * 3; // Repulsion strength
-                        const directionY = forceDirectionY * force * 3;
+                        const maxForce = (mouse.radius - distance) / mouse.radius;
                         
-                        this.x += directionX;
-                        //this.y += directionY;
+                        // Much stronger repulsion with exponential falloff for dramatic effect
+                        const repulsionStrength = 8; // Increased from 3 to 8
+                        const force = Math.pow(maxForce, 0.7) * repulsionStrength;
+                        
+                        // Apply force to velocity for smoother motion
+                        this.velocityX += forceDirectionX * force;
+                        
+                        // Add some randomness to make it look more organic
+                        this.velocityX += (Math.random() - 0.5) * 0.5;
                     }
                 }
                 
-                // Return to base column
-                if (this.x !== this.baseX) {
-                    let dx = this.x - this.baseX;
-                    this.x -= dx / 15; // Easing back to position
+                // Apply velocity with damping for smooth motion
+                this.offsetX += this.velocityX;
+                this.x = this.baseX + this.offsetX;
+                
+                // Smooth return to original position with stronger attraction
+                const returnForce = 0.15; // Increased from 0.067 (1/15) for faster return
+                this.velocityX *= 0.92; // Damping factor for realistic physics
+                this.offsetX *= (1 - returnForce); // Gradual return to base position
+                
+                // Clamp extreme positions to prevent characters from going too far off-screen
+                const maxOffset = canvas.width * 0.3;
+                if (Math.abs(this.offsetX) > maxOffset) {
+                    this.offsetX = Math.sign(this.offsetX) * maxOffset;
+                    this.velocityX *= 0.5; // Reduce velocity when hitting bounds
                 }
             }
         }
@@ -623,6 +657,7 @@
             particles = [];
             columns = Math.floor(canvas.width / fontSize);
             for (let i = 0; i < columns; i++) {
+                // Stagger initial positions for more natural look
                 const y = Math.random() * canvas.height / fontSize;
                 particles.push(new Particle(i * fontSize, y, fontSize, canvas.height));
             }
@@ -631,9 +666,11 @@
         function animate() {
             if (!matrixEffectEnabled) return;
             
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            // Darker trail for more dramatic contrast (increased alpha from 0.05 to 0.08)
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Update and draw all particles
             particles.forEach(particle => {
                 particle.update();
                 particle.draw(ctx);
@@ -672,7 +709,6 @@
                 startMatrix();
             }
         });
-
 
         // --- UI and Other Scripts ---
 
@@ -801,4 +837,3 @@
     </script>
 </body>
 </html>
-
