@@ -29,6 +29,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0.3;
+            transition: opacity 0.5s ease-out;
         }
 
         .matrix-text {
@@ -93,7 +94,9 @@
     <header class="bg-black/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="text-xl md:text-2xl font-bold matrix-text header-glitch cursor-pointer">A. N .M. SAJEDUL ALAM</div>
+                <div class="flex items-center gap-x-6">
+                    <div class="text-xl md:text-2xl font-bold matrix-text header-glitch cursor-pointer">A. N. M. SAJEDUL ALAM</div>
+                </div>
                 <nav class="hidden md:flex items-center space-x-4 text-xs">
                     <a href="#summary" class="hover:matrix-text transition-colors">SUMMARY</a>
                     <a href="#experience" class="hover:matrix-text transition-colors">EXPERIENCE</a>
@@ -113,6 +116,7 @@
                     </div>
 
                     <a href="#publications" class="hover:matrix-text transition-colors">PUBLICATIONS</a>
+                    <button id="matrix-toggle" class="text-xs matrix-text border border-matrix-green rounded px-2 py-1 hover:bg-matrix-green hover:text-black transition-colors duration-300">Matrix: ON</button>
                 </nav>
                 <button id="mobile-menu-button" class="md:hidden focus:outline-none">
                     <svg class="w-6 h-6 matrix-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -137,6 +141,9 @@
                  </div>
             </div>
             <a href="#publications" class="block py-2 px-6 text-sm hover:bg-gray-900 hover:matrix-text">PUBLICATIONS</a>
+             <div class="px-6 py-2 border-t border-gray-800 mt-2">
+                <button id="mobile-matrix-toggle" class="w-full text-left text-sm text-gray-300 hover:matrix-text">Matrix: ON</button>
+            </div>
         </div>
     </header>
 
@@ -528,142 +535,270 @@
         const alphabet = katakana + latin + nums + runic;
 
         const fontSize = 16;
-        const columns = canvas.width / fontSize;
+        let columns = Math.floor(canvas.width / fontSize);
+        let particles = [];
+        let animationFrameId;
+        
+        // --- settings ---
+        let matrixEffectEnabled = true;
 
-        const rainDrops = [];
+        // Mouse object for interaction
+        const mouse = {
+            x: undefined,
+            y: undefined,
+            radius: 80 // The radius of the repulsion field
+        };
 
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        
+        window.addEventListener('mouseout', function() {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+
+        // Particle class
+        class Particle {
+            constructor(x, y, fontSize, canvasHeight) {
+                this.x = x;
+                this.y = y;
+                this.fontSize = fontSize;
+                this.canvasHeight = canvasHeight;
+                this.baseX = this.x; // Original x position to return to
+                this.text = '';
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.setRandomChar();
+            }
+            
+            setRandomChar(){
+                 this.text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            }
+
+            draw(context) {
+                context.fillStyle = '#00FF41';
+                context.font = this.fontSize + 'px monospace';
+                context.fillText(this.text, this.x, this.y * this.fontSize);
+            }
+
+            update() {
+                // Main downward movement
+                this.y += this.speed;
+
+                // Reset particle if it goes off screen
+                if (this.y * this.fontSize > this.canvasHeight) {
+                    this.y = 0;
+                    this.setRandomChar();
+                }
+
+                // Mouse repulsion logic
+                if (mouse.x !== undefined && mouse.y !== undefined) {
+                    let dx = this.x - mouse.x;
+                    let dy = (this.y * this.fontSize) - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const directionX = forceDirectionX * force * 3; // Repulsion strength
+                        const directionY = forceDirectionY * force * 3;
+                        
+                        this.x += directionX;
+                        //this.y += directionY;
+                    }
+                }
+                
+                // Return to base column
+                if (this.x !== this.baseX) {
+                    let dx = this.x - this.baseX;
+                    this.x -= dx / 15; // Easing back to position
+                }
+            }
         }
 
-        const drawMatrix = () => {
+        function init() {
+            particles = [];
+            columns = Math.floor(canvas.width / fontSize);
+            for (let i = 0; i < columns; i++) {
+                const y = Math.random() * canvas.height / fontSize;
+                particles.push(new Particle(i * fontSize, y, fontSize, canvas.height));
+            }
+        }
+
+        function animate() {
+            if (!matrixEffectEnabled) return;
+            
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#00FF41'; // Matrix Green
-            ctx.font = fontSize + 'px monospace';
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw(ctx);
+            });
 
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+            animationFrameId = requestAnimationFrame(animate);
+        }
 
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+        // Start and Stop logic
+        function startMatrix() {
+            if (animationFrameId) return;
+            canvas.style.opacity = '0.3';
+            init();
+            animate();
+        }
+
+        function stopMatrix() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
             }
-        };
-        
-        setInterval(drawMatrix, 33);
+            canvas.style.opacity = '0';
+            setTimeout(() => {
+                if(!matrixEffectEnabled) ctx.clearRect(0, 0, canvas.width, canvas.height)
+            }, 500);
+        }
 
         window.addEventListener('resize', () => {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            // Recalculate columns and reset rainDrops on resize
-            const newColumns = canvas.width / fontSize;
-            rainDrops.length = 0;
-            for (let x = 0; x < newColumns; x++) {
-                rainDrops[x] = 1;
+            if (matrixEffectEnabled) {
+                startMatrix();
             }
         });
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Close mobile menu when a link is clicked
-        const allMobileNavLinks = mobileMenu.querySelectorAll('a');
-        allMobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // --- UI and Other Scripts ---
 
-        // Fade-in sections
-        const sections = document.querySelectorAll('.section-fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start matrix on load
+            startMatrix();
+            
+            // Toggle Buttons
+            const matrixToggleButton = document.getElementById('matrix-toggle');
+            const mobileMatrixToggleButton = document.getElementById('mobile-matrix-toggle');
+
+            function updateToggleButtons() {
+                const text = `Matrix: ${matrixEffectEnabled ? 'ON' : 'OFF'}`;
+                if (matrixToggleButton) matrixToggleButton.textContent = text;
+                if (mobileMatrixToggleButton) mobileMatrixToggleButton.textContent = text;
+            }
+
+            function toggleMatrixEffect() {
+                matrixEffectEnabled = !matrixEffectEnabled;
+                if (matrixEffectEnabled) {
+                    startMatrix();
+                } else {
+                    stopMatrix();
                 }
-            });
-        }, { threshold: 0.1 });
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Typing Effect
-        const typingElement = document.getElementById('typing-effect');
-        const textToType = "A. N. M. Sajedul Alam";
-        let index = 0;
-        function type() {
-            if (index < textToType.length) {
-                typingElement.innerHTML = textToType.substring(0, index + 1) + '<span class="type-cursor"></span>';
-                index++;
-                setTimeout(type, 150);
-            } else {
-                 typingElement.innerHTML = textToType + '<span class="type-cursor"></span>';
+                updateToggleButtons();
             }
-        }
-        document.addEventListener('DOMContentLoaded', type);
 
-        // Compile Date
-        document.getElementById('compile-date').textContent = new Date().toUTCString();
+            if (matrixToggleButton) matrixToggleButton.addEventListener('click', toggleMatrixEffect);
+            if (mobileMatrixToggleButton) mobileMatrixToggleButton.addEventListener('click', toggleMatrixEffect);
 
-        // Dropdown menu for Projects (Desktop)
-        const projectsDropdownButton = document.getElementById('projects-dropdown-button');
-        const projectsDropdownMenu = document.getElementById('projects-dropdown-menu');
-        const projectsDropdownContainer = document.getElementById('projects-dropdown-container');
-
-        if (projectsDropdownButton) {
-            projectsDropdownButton.addEventListener('click', (event) => {
-                event.stopPropagation();
-                projectsDropdownMenu.classList.toggle('hidden');
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
-
-            projectsDropdownMenu.querySelectorAll('a').forEach(link => {
+            
+            // Close mobile menu when a link is clicked
+            const allMobileNavLinks = mobileMenu.querySelectorAll('a');
+            allMobileNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    projectsDropdownMenu.classList.add('hidden');
+                    mobileMenu.classList.add('hidden');
                 });
             });
-        }
 
-        document.addEventListener('click', (event) => {
-            if (projectsDropdownContainer && !projectsDropdownContainer.contains(event.target)) {
-                if(!projectsDropdownMenu.classList.contains('hidden')) {
-                    projectsDropdownMenu.classList.add('hidden');
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Fade-in sections
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Typing Effect
+            const typingElement = document.getElementById('typing-effect');
+            const textToType = "A. N. M. Sajedul Alam";
+            let index = 0;
+            function type() {
+                if (index < textToType.length) {
+                    typingElement.innerHTML = textToType.substring(0, index + 1) + '<span class="type-cursor"></span>';
+                    index++;
+                    setTimeout(type, 150);
+                } else {
+                     typingElement.innerHTML = textToType + '<span class="type-cursor"></span>';
                 }
             }
-        });
+            type();
 
-        // Mobile Projects menu toggle
-        const mobileProjectsButton = document.getElementById('mobile-projects-button');
-        const mobileProjectsMenu = document.getElementById('mobile-projects-menu');
-        const mobileProjectsArrow = document.getElementById('mobile-projects-arrow');
+            // Compile Date
+            document.getElementById('compile-date').textContent = new Date().toUTCString();
 
-        if(mobileProjectsButton){
-            mobileProjectsButton.addEventListener('click', () => {
-                const isHidden = mobileProjectsMenu.classList.toggle('hidden');
-                mobileProjectsArrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+            // Dropdown menu for Projects (Desktop)
+            const projectsDropdownButton = document.getElementById('projects-dropdown-button');
+            const projectsDropdownMenu = document.getElementById('projects-dropdown-menu');
+            const projectsDropdownContainer = document.getElementById('projects-dropdown-container');
+
+            if (projectsDropdownButton) {
+                projectsDropdownButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    projectsDropdownMenu.classList.toggle('hidden');
+                });
+
+                projectsDropdownMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        projectsDropdownMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            document.addEventListener('click', (event) => {
+                if (projectsDropdownContainer && !projectsDropdownContainer.contains(event.target)) {
+                    if(!projectsDropdownMenu.classList.contains('hidden')) {
+                        projectsDropdownMenu.classList.add('hidden');
+                    }
+                }
             });
-        }
+
+            // Mobile Projects menu toggle
+            const mobileProjectsButton = document.getElementById('mobile-projects-button');
+            const mobileProjectsMenu = document.getElementById('mobile-projects-menu');
+            const mobileProjectsArrow = document.getElementById('mobile-projects-arrow');
+
+            if(mobileProjectsButton){
+                mobileProjectsButton.addEventListener('click', () => {
+                    const isHidden = mobileProjectsMenu.classList.toggle('hidden');
+                    mobileProjectsArrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+                });
+            }
+        });
     </script>
 </body>
 </html>
-" and the user's query is "add an option to turn on and turn off matrix rain effect from the top left corner.
-".
 
