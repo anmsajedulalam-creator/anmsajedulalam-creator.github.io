@@ -5,200 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A. N. M. Sajedul Alam - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --matrix-green: #00FF41;
-            --dark-bg: #000000;
+            --dark-bg: #0a0a0a;
             --text-color: #E0E0E0;
-            --glow-color: rgba(0, 255, 65, 0.5);
+            --glow-color: rgba(0, 255, 65, 0.2);
             --accent-blue: #64FFDA;
-            --accent-purple: #BB86FC;
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --section-bg: rgba(20, 20, 30, 0.9);
         }
         body {
-            font-family: 'Fira Code', monospace;
+            font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-color);
+            line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-            transition: opacity 0.5s ease-out;
         }
         .matrix-text {
             color: var(--matrix-green);
-            text-shadow: 0 0 5px var(--glow-color);
         }
-
         .section-container {
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(20, 20, 20, 0.8));
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--matrix-green);
-            box-shadow: 0 0 30px var(--glow-color), inset 0 0 20px rgba(0, 255, 65, 0.1);
+            background: var(--section-bg);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
             padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 4rem;
-            position: relative;
-            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 3rem;
         }
-        .section-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-            animation: scanline 3s infinite;
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
         }
-        @keyframes scanline {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 255, 65, 0.15);
+            border-color: var(--accent-blue);
+            background: rgba(15, 15, 25, 0.95);
         }
-
-        .header-glitch {
-            text-shadow: 0 0 5px var(--glow-color);
-        }
-        .header-glitch:hover {
-            animation: glitch 1s linear infinite;
-        }
-        @keyframes glitch {
-            2%,64% { transform: translate(2px,0) skew(0deg); }
-            4%,60% { transform: translate(-2px,0) skew(0deg); }
-            62% { transform: translate(0,0) skew(5deg); }
-        }
-        /* Enhanced Interactive Name Characters */
         .name-char {
             display: inline-block;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            z-index: 1;
-            cursor: pointer;
-            transform-origin: center bottom;
-        }
-
-        .name-char:hover {
-            transform: scale(1.4) rotate(10deg) translateY(-12px);
-            text-shadow:
-                0 0 15px var(--matrix-green),
-                0 0 30px var(--matrix-green),
-                0 0 45px var(--matrix-green),
-                0 0 60px var(--accent-blue);
-            filter: brightness(1.8) hue-rotate(20deg);
-            z-index: 10;
-        }
-
-        .name-char.char-pulse {
-            animation: charPulse 0.8s ease-out;
-        }
-
-        .name-char.char-shake {
-            animation: charShake 0.6s ease-out;
-        }
-
-        .name-char.char-bounce {
-            animation: charBounce 1s ease-out;
-        }
-        .name-char.char-spiral {
-            animation: charSpiral 1.2s ease-out;
-        }
-        .name-char.char-flip {
-            animation: charFlip 0.8s ease-out;
-        }
-
-        @keyframes charPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.6); text-shadow: 0 0 25px var(--matrix-green); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes charShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px) rotate(-5deg); }
-            75% { transform: translateX(5px) rotate(5deg); }
-        }
-
-        @keyframes charBounce {
-            0%, 100% { transform: translateY(0); }
-            25% { transform: translateY(-20px) scale(1.2); }
-            50% { transform: translateY(-15px) scale(1.1); }
-            75% { transform: translateY(-8px) scale(1.05); }
-        }
-        @keyframes charSpiral {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.5); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-        @keyframes charFlip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg) scale(1.3); }
-            100% { transform: rotateY(360deg); }
-        }
-
-        /* Enhanced Ripple effect */
-        .char-ripple {
-            position: relative;
-            overflow: visible;
-        }
-
-        .char-ripple::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(0, 255, 65, 0.8) 0%, rgba(100, 255, 218, 0.4) 50%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            animation: rippleExpand 1s ease-out;
-        }
-
-        @keyframes rippleExpand {
-            to {
-                width: 100px;
-                height: 100px;
-                opacity: 0;
-            }
-        }
-        /* Hyperlink Preview Tooltip */
-        .link-preview {
-            position: absolute;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95));
-            border: 2px solid var(--matrix-green);
-            border-radius: 8px;
-            padding: 12px;
-            max-width: 300px;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(10px);
             transition: all 0.3s ease;
-            pointer-events: none;
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
-            backdrop-filter: blur(10px);
+            cursor: pointer;
         }
-        .link-preview.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .link-preview h4 {
+        .name-char:hover {
             color: var(--matrix-green);
-            font-size: 14px;
-            margin-bottom: 8px;
-            font-weight: bold;
+            transform: scale(1.1);
         }
-        .link-preview p {
-            color: var(--text-color);
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid rgba(0, 255, 65, 0.3);
+            margin-bottom: 1.5rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--matrix-green);
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+        .skill-tag {
+            display: inline-block;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
             font-size: 12px;
-            line-height: 1.4;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        .skill-tag:hover {
+            background: rgba(0, 255, 65, 0.2);
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        .interactive-btn {
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            background: transparent;
+            cursor: pointer;
+        }
+        .interactive-btn:hover {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: var(--matrix-green);
+            color: #ffffff;
         }
         .type-cursor {
             border-right: .15em solid var(--matrix-green);
@@ -210,121 +114,42 @@
         }
         .section-fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .section-fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Enhanced Button Interactions */
-        .interactive-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .interactive-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
-        }
-        .interactive-btn::before {
-            content: '';
+        /* Link Preview Tooltip - Simplified */
+        .link-preview {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, var(--matrix-green), transparent);
-            transition: all 0.5s ease;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: -1;
-        }
-        .interactive-btn:hover::before {
-            width: 300px;
-            height: 300px;
-            opacity: 0.1;
-        }
-        /* Particle Trail Effect */
-        .particle-trail {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: var(--matrix-green);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 5;
-            opacity: 0.8;
-            animation: particleFade 1s ease-out forwards;
-        }
-        @keyframes particleFade {
-            0% {
-                opacity: 0.8;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0);
-            }
-        }
-        /* Experience Timeline Enhancements */
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid rgba(0, 255, 65, 0.3);
-            transition: all 0.3s ease;
-        }
-        .timeline-item:hover {
-            border-left-color: var(--matrix-green);
-            transform: translateX(5px);
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--matrix-green);
-            box-shadow: 0 0 15px var(--glow-color);
-            transition: all 0.3s ease;
-        }
-        .timeline-item:hover .timeline-dot {
-            transform: scale(1.5);
-            box-shadow: 0 0 25px var(--glow-color);
-        }
-        /* Skill Tag Animations */
-        .skill-tag {
-            display: inline-block;
-            background: rgba(0, 255, 65, 0.1);
+            background: rgba(20, 20, 30, 0.95);
             border: 1px solid var(--matrix-green);
-            padding: 4px 8px;
-            margin: 2px;
-            border-radius: 4px;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            border-radius: 6px;
+            padding: 10px;
+            max-width: 280px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+            font-size: 13px;
+            line-height: 1.4;
         }
-        .skill-tag:hover {
-            background: var(--matrix-green);
-            color: black;
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 4px 15px var(--glow-color);
+        .link-preview.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        /* Floating Elements */
-        .floating-element {
-            animation: float 3s ease-in-out infinite;
+        .link-preview h4 {
+            color: var(--matrix-green);
+            margin-bottom: 6px;
+            font-weight: 600;
         }
-        .floating-element:nth-child(even) {
-            animation-delay: -1.5s;
-            animation-direction: reverse;
+        .link-preview p {
+            color: var(--text-color);
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        /* Loading Progress Bar */
+        /* Progress Bar */
         .progress-bar {
             position: fixed;
             top: 0;
@@ -335,269 +160,122 @@
             z-index: 1000;
             transition: width 0.3s ease;
         }
-        /* Holographic Project Cards */
-        .project-card {
-            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05), rgba(100, 255, 218, 0.05));
-            border: 1px solid var(--matrix-green);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, var(--matrix-green), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            animation: rotate 4s linear infinite;
-        }
-        .project-card:hover::before {
-            opacity: 0.1;
-        }
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.3);
-            border-color: var(--accent-blue);
-        }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        /* Social Icon Enhancements */
-        .social-icon-link {
-            position: relative;
-            padding: 8px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        .social-icon-link:hover {
-            background: rgba(0, 255, 65, 0.1);
-            transform: translateY(-3px);
-        }
-        .social-icon-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--matrix-green);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        .social-icon-link:hover::after {
-            width: 100%;
-        }
-        /* Magnetic Button Effect */
-        .magnetic-btn {
-            transition: transform 0.2s ease;
-            cursor: pointer;
-        }
-        /* Data Stream Effect */
-        .data-stream {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100%;
-            background: linear-gradient(0deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-            animation: dataFlow 2s linear infinite;
-            opacity: 0.3;
-        }
-        @keyframes dataFlow {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-        /* Neural Network Background */
-        .neural-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            z-index: -1;
-        }
-        /* Morphing Loader */
-        .morphing-loader {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--matrix-green);
-            border-radius: 50%;
-            animation: morph 1.5s ease-in-out infinite;
-        }
-        @keyframes morph {
-            0%, 100% { border-radius: 50%; transform: rotate(0deg); }
-            25% { border-radius: 0%; transform: rotate(90deg); }
-            50% { border-radius: 50%; transform: rotate(180deg); }
-            75% { border-radius: 0%; transform: rotate(270deg); }
-        }
-        /* Quantum Dot Effect */
-        .quantum-dot {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--matrix-green);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: quantumFloat 4s ease-in-out infinite;
-        }
-        @keyframes quantumFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, -20px) scale(1.2); }
-            50% { transform: translate(-10px, -30px) scale(0.8); }
-            75% { transform: translate(-20px, 10px) scale(1.1); }
-        }
-        /* Experience Duration Highlight */
-        .duration-highlight {
-            background: linear-gradient(90deg, var(--matrix-green), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-        @keyframes gradientShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .section-container {
+                padding: 1.5rem;
+            }
+            .project-card {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body class="antialiased">
     <div class="progress-bar" id="progress-bar"></div>
-    <canvas id="matrix-canvas"></canvas>
-    <!-- Quantum Dots -->
-    <div class="quantum-dot" style="top: 10%; left: 15%;"></div>
-    <div class="quantum-dot" style="top: 60%; left: 85%; animation-delay: -1s;"></div>
-    <div class="quantum-dot" style="top: 30%; left: 70%; animation-delay: -2s;"></div>
-    <div class="quantum-dot" style="top: 80%; left: 20%; animation-delay: -3s;"></div>
-    <!-- Hyperlink Preview Tooltip -->
+    <!-- Link Preview Tooltip -->
     <div id="link-preview" class="link-preview">
-        <div class="morphing-loader" id="preview-loader"></div>
-        <div id="preview-content" style="display: none;">
-            <h4 id="preview-title"></h4>
-            <p id="preview-description"></p>
-        </div>
+        <h4 id="preview-title"></h4>
+        <p id="preview-description"></p>
     </div>
     <!-- Header & Navigation -->
     <header class="bg-black/90 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-x-6">
-                    <div class="text-xl md:text-2xl font-bold matrix-text header-glitch cursor-pointer interactive-name" id="interactive-name">
-                        <span class="name-char" data-char="A">A</span><span class="name-char" data-char=".">.</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="N">N</span><span class="name-char" data-char=".">.</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="M">M</span><span class="name-char" data-char=".">.</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="S">S</span><span class="name-char" data-char="A">A</span><span class="name-char" data-char="J">J</span><span class="name-char" data-char="E">E</span><span class="name-char" data-char="D">D</span><span class="name-char" data-char="U">U</span><span class="name-char" data-char="L">L</span><span class="name-char" data-char=" "> </span><span class="name-char" data-char="A">A</span><span class="name-char" data-char="L">L</span><span class="name-char" data-char="A">A</span><span class="name-char" data-char="M">M</span>
+                <div class="flex items-center gap-x-4">
+                    <div class="text-xl md:text-2xl font-bold matrix-text cursor-pointer" id="interactive-name">
+                        <span class="name-char" data-char="A">A</span><span class="name-char" data-char=".">.</span>
+                        <span class="name-char" data-char=" "> </span><span class="name-char" data-char="N">N</span><span class="name-char" data-char=".">.</span>
+                        <span class="name-char" data-char=" "> </span><span class="name-char" data-char="M">M</span><span class="name-char" data-char=".">.</span>
+                        <span class="name-char" data-char=" "> </span><span class="name-char" data-char="S">S</span><span class="name-char" data-char="A">A</span>
+                        <span class="name-char" data-char="J">J</span><span class="name-char" data-char="E">E</span><span class="name-char" data-char="D">D</span>
+                        <span class="name-char" data-char="U">U</span><span class="name-char" data-char="L">L</span>
+                        <span class="name-char" data-char=" "> </span><span class="name-char" data-char="A">A</span>
+                        <span class="name-char" data-char="L">L</span><span class="name-char" data-char="A">A</span>
+                        <span class="name-char" data-char="M">M</span>
                     </div>
                 </div>
                 <nav class="hidden md:flex items-center space-x-4 text-xs">
-                    <a href="#summary" class="interactive-btn hover:matrix-text transition-colors">SUMMARY</a>
-                    <a href="#experience" class="interactive-btn hover:matrix-text transition-colors">EXPERIENCE</a>
-                    <a href="#skills" class="interactive-btn hover:matrix-text transition-colors">SKILLS</a>
-
-                    <!-- Projects Dropdown -->
+                    <a href="#summary" class="interactive-btn hover:matrix-text">SUMMARY</a>
+                    <a href="#experience" class="interactive-btn hover:matrix-text">EXPERIENCE</a>
+                    <a href="#skills" class="interactive-btn hover:matrix-text">SKILLS</a>
                     <div class="relative" id="projects-dropdown-container">
-                        <button id="projects-dropdown-button" class="interactive-btn hover:matrix-text transition-colors flex items-center focus:outline-none">
+                        <button id="projects-dropdown-button" class="interactive-btn hover:matrix-text flex items-center">
                             PROJECTS
-                            <svg class="w-4 h-4 ml-1 transition-transform duration-300" id="dropdown-arrow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </button>
-                        <div id="projects-dropdown-menu" class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-black/95 border border-gray-800 rounded-md shadow-2xl py-1 w-48 z-50 backdrop-blur-sm">
-                            <a href="#interesting-projects" class="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-900 hover:matrix-text transition-all duration-200">Interesting Projects</a>
-                            <a href="#industrial-projects" class="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-900 hover:matrix-text transition-all duration-200">Industrial Projects</a>
-                            <a href="#personal-projects" class="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-900 hover:matrix-text transition-all duration-200">Personal Projects</a>
+                        <div id="projects-dropdown-menu" class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-black/95 border border-gray-800 rounded-md shadow-lg py-1 w-48 z-50">
+                            <a href="#interesting-projects" class="block px-4 py-2 text-xs hover:bg-gray-900 hover:matrix-text">Interesting Projects</a>
+                            <a href="#industrial-projects" class="block px-4 py-2 text-xs hover:bg-gray-900 hover:matrix-text">Industrial Projects</a>
+                            <a href="#personal-projects" class="block px-4 py-2 text-xs hover:bg-gray-900 hover:matrix-text">Personal Projects</a>
                         </div>
                     </div>
-                    <a href="#publications" class="interactive-btn hover:matrix-text transition-colors">PUBLICATIONS</a>
-                    <button id="matrix-toggle" class="interactive-btn text-xs matrix-text border border-matrix-green rounded px-3 py-2 hover:bg-matrix-green hover:text-black transition-all duration-300 magnetic-btn">Matrix: ON</button>
+                    <a href="#publications" class="interactive-btn hover:matrix-text">PUBLICATIONS</a>
                 </nav>
-                <button id="mobile-menu-button" class="md:hidden focus:outline-none magnetic-btn">
-                    <svg class="w-6 h-6 matrix-text transition-transform duration-300" id="mobile-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6 matrix-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-sm">
-            <a href="#summary" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">SUMMARY</a>
-            <a href="#experience" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">EXPERIENCE</a>
-            <a href="#skills" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">SKILLS</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95">
+            <a href="#summary" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text">SUMMARY</a>
+            <a href="#experience" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text">EXPERIENCE</a>
+            <a href="#skills" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text">SKILLS</a>
             <div>
-                 <button id="mobile-projects-button" class="w-full text-left py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text flex justify-between items-center transition-all duration-200">
+                <button id="mobile-projects-button" class="w-full text-left py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text flex justify-between items-center">
                     <span>PROJECTS</span>
-                    <svg class="w-4 h-4 transition-transform duration-200" id="mobile-projects-arrow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                 </button>
-                 <div id="mobile-projects-menu" class="hidden pl-8 bg-gray-950">
-                     <a href="#interesting-projects" class="block py-2 px-4 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">Interesting Projects</a>
-                     <a href="#industrial-projects" class="block py-2 px-4 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">Industrial Projects</a>
-                     <a href="#personal-projects" class="block py-2 px-4 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">Personal Projects</a>
-                 </div>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                <div id="mobile-projects-menu" class="hidden pl-8">
+                    <a href="#interesting-projects" class="block py-2 px-4 text-sm hover:bg-gray-900 hover:matrix-text">Interesting Projects</a>
+                    <a href="#industrial-projects" class="block py-2 px-4 text-sm hover:bg-gray-900 hover:matrix-text">Industrial Projects</a>
+                    <a href="#personal-projects" class="block py-2 px-4 text-sm hover:bg-gray-900 hover:matrix-text">Personal Projects</a>
+                </div>
             </div>
-            <a href="#publications" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">PUBLICATIONS</a>
-             <div class="px-6 py-3 border-t border-gray-800 mt-2">
-                <button id="mobile-matrix-toggle" class="w-full text-left text-sm text-gray-300 hover:matrix-text interactive-btn">Matrix: ON</button>
-            </div>
+            <a href="#publications" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text">PUBLICATIONS</a>
         </div>
     </header>
     <main class="container mx-auto px-6 pt-24 z-10 relative">
         <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center items-start relative">
-            <div class="neural-bg">
-                <canvas id="neural-network"></canvas>
-            </div>
-            <h1 id="typing-effect" class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4 floating-element"><span class="type-cursor"></span></h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl floating-element">Senior AI/ML Engineer & Technical Lead with <span class="duration-highlight" id="total-experience">4+ years</span> of leadership, specializing in intelligent automation and enterprise AI deployment.</p>
-
-            <!-- Enhanced Social Links -->
-            <div class="mb-10 floating-element">
+        <section class="min-h-screen flex flex-col justify-center items-start">
+            <h1 id="typing-effect" class="text-4xl md:text-5xl font-bold text-white leading-tight mb-4"><span class="type-cursor"></span></h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl">
+                Senior AI/ML Engineer & Technical Lead with <span class="text-white font-semibold">4+ years</span> of leadership, specializing in intelligent automation and enterprise AI deployment.
+            </p>
+            <!-- Social Links -->
+            <div class="mb-10">
                 <p class="text-sm matrix-text mb-4">// DIRECT_ACCESS_LINKS</p>
                 <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-                    <!-- GitHub -->
-                    <a href="https://github.com/anmsajedulalam" target="_blank" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="GitHub profile showcasing open-source projects and contributions">
-                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                        <span class="group-hover:matrix-text group-hover:underline">GitHub</span>
+                    <a href="https://github.com/anmsajedulalam" target="_blank" class="interactive-btn flex items-center text-gray-300 hover:text-white" data-preview="GitHub profile">
+                        <svg class="w-5 h-5 mr-2" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        <span>GitHub</span>
                     </a>
-                    <!-- LinkedIn -->
-                    <a href="https://linkedin.com/in/anmsajedulalam" target="_blank" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="Professional LinkedIn profile with career achievements and network">
-                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                        <span class="group-hover:matrix-text group-hover:underline">LinkedIn</span>
+                    <a href="https://linkedin.com/in/anmsajedulalam" target="_blank" class="interactive-btn flex items-center text-gray-300 hover:text-white" data-preview="LinkedIn profile">
+                        <svg class="w-5 h-5 mr-2" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                        <span>LinkedIn</span>
                     </a>
-                    <!-- Google Scholar -->
-                    <a href="https://scholar.google.com/citations?user=CFGs02gAAAAJ" target="_blank" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="Academic publications and research citations in AI/ML">
-                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Google Scholar</title><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 6v5.18C4.41 10.1 9.42 8.7 12 5.43 14.58 8.7 19.59 10.1 24 11.18V6L12 0z"/></svg>
-                        <span class="group-hover:matrix-text group-hover:underline">Google Scholar</span>
+                    <a href="https://scholar.google.com/citations?user=CFGs02gAAAAJ" target="_blank" class="interactive-btn flex items-center text-gray-300 hover:text-white" data-preview="Google Scholar profile">
+                        <svg class="w-5 h-5 mr-2" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Google Scholar</title><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 6v5.18C4.41 10.1 9.42 8.7 12 5.43 14.58 8.7 19.59 10.1 24 11.18V6L12 0z"/></svg>
+                        <span>Google Scholar</span>
                     </a>
-                    <!-- Kaggle -->
-                     <a href="https://www.kaggle.com/sajiduxd" target="_blank" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="Data science competitions and machine learning projects on Kaggle">
-                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Kaggle</title><path d="m15.352 1.34-5.32 8.7L4.76 1.34H.028l7.46 11.12L0 22.66h4.72l5.12-8.08 5.25 8.08h4.88L12.08 12.7l7.55-11.37z"/></svg>
-                        <span class="group-hover:matrix-text group-hover:underline">Kaggle</span>
+                    <a href="mailto:anmsajedulalam@gmail.com" class="interactive-btn flex items-center text-gray-300 hover:text-white" data-preview="Email">
+                        <svg class="w-5 h-5 mr-2" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                        <span>Email</span>
                     </a>
-                    <!-- Email -->
-                    <a href="mailto:anmsajedulalam@gmail.com" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="Direct email contact for professional inquiries">
-                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                        <span class="group-hover:matrix-text group-hover:underline">Email</span>
-                    </a>
-                    <!-- Location -->
-                    <div class="group flex items-center text-gray-400 magnetic-btn">
-                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Location</title><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        <span class="matrix-text">Dhaka, Bangladesh</span>
-                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Summary Section -->
         <section id="summary" class="py-20 section-fade-in">
-             <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold mb-6 matrix-text">PROFESSIONAL_SUMMARY.log</h2>
+            <div class="section-container">
+                <h2 class="text-3xl font-bold mb-6">Professional Summary</h2>
                 <p class="text-base leading-relaxed">
-                    Senior AI/ML Engineer with <span class="duration-highlight" id="summary-experience">4+ years</span> of leadership experience across international and local markets including Germany, and Bangladesh. Proven track record of scaling AI teams from 2 to 9 engineers while managing $800K+ R&D budgets and generating $2M+ business value through intelligent automation and enterprise AI deployment with extensive experience in on-site team management and stakeholder collaboration across enterprise environments.
+                    Senior AI/ML Engineer with <strong>4+ years</strong> of leadership experience across international and local markets including Germany and Bangladesh. Proven track record of scaling AI teams from 2 to 9 engineers while managing $800K+ R&D budgets and generating $2M+ business value through intelligent automation and enterprise AI deployment.
                 </p>
-                <h3 class="text-xl font-bold mt-6 mb-4 matrix-text">Key Achievements:</h3>
-                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                <h3 class="text-xl font-bold mt-6 mb-4">Key Achievements:</h3>
+                <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
                     <li>Led cross-functional ML teams with 95% project success rate.</li>
                     <li>Deployed 50+ enterprise AI solutions (90%+ accuracy) in banking, logistics, surveillance, e-commerce.</li>
                     <li>Built scalable systems processing 82 live streams across 18 locations.</li>
@@ -606,89 +284,84 @@
                 </ul>
             </div>
         </section>
+
         <!-- Education Section -->
         <section id="education" class="py-20 section-fade-in">
-             <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold mb-8 matrix-text">EDUCATION_RECORDS.log</h2>
-                <div class="space-y-8">
-                     <div class="project-card">
-                        <h3 class="text-xl font-bold text-white">Master of Science in Computer Science and Engineering</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.bracu.ac.bd/" target="_blank" class="hover:underline magnetic-btn" data-preview="BRAC University - Leading private research university in Bangladesh">BRAC University</a>, <a href="https://www.bracu.ac.bd/academics/schools-and-departments/school-data-and-sciences" target="_blank" class="hover:underline magnetic-btn" data-preview="School of Data and Sciences - Premier computer science education">School of Data and Sciences</a> | Dhaka, Bangladesh</p>
+            <div class="section-container">
+                <h2 class="text-3xl font-bold mb-8">Education</h2>
+                <div class="space-y-6">
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold mb-2">Master of Science in Computer Science and Engineering</h3>
+                        <p class="text-gray-300"><a href="https://www.bracu.ac.bd/" target="_blank" class="matrix-text hover:underline" data-preview="BRAC University">BRAC University</a>, Dhaka, Bangladesh</p>
                         <p class="text-sm text-gray-400 mt-1">Thesis Ongoing | CGPA: 3.78/4.00 (Top 5%)</p>
                     </div>
                     <div class="project-card">
-                        <h3 class="text-xl font-bold text-white">Bachelor of Science in Computer Science</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.bracu.ac.bd/" target="_blank" class="hover:underline magnetic-btn" data-preview="BRAC University - Leading private research university in Bangladesh">BRAC University</a>, <a href="https://www.bracu.ac.bd/academics/schools-and-departments/school-data-and-sciences" target="_blank" class="hover:underline magnetic-btn" data-preview="School of Data and Sciences - Premier computer science education">School of Data and Sciences</a> | Dhaka, Bangladesh</p>
+                        <h3 class="text-xl font-bold mb-2">Bachelor of Science in Computer Science</h3>
+                        <p class="text-gray-300"><a href="https://www.bracu.ac.bd/" target="_blank" class="matrix-text hover:underline" data-preview="BRAC University">BRAC University</a>, Dhaka, Bangladesh</p>
                         <p class="text-sm text-gray-400 mt-1">Graduated 2019</p>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Experience Section -->
         <section id="experience" class="py-20 section-fade-in">
-             <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold mb-8 matrix-text">PROFESSIONAL_EXPERIENCE.dat</h2>
+            <div class="section-container">
+                <h2 class="text-3xl font-bold mb-8">Professional Experience</h2>
                 <div class="mb-6 text-center">
-                    <p class="text-lg matrix-text">Total Experience: <span class="duration-highlight text-2xl" id="calculated-experience">4+ years</span></p>
+                    <p class="text-lg">Total Experience: <strong>4+ years</strong></p>
                 </div>
-                <div class="space-y-12">
-                    <!-- Experience Item -->
+                <div class="space-y-8">
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <p class="text-sm text-gray-400">Jul 2023 - Jun 2025 <span class="duration-highlight">(2 years)</span></p>
-                        <h3 class="text-xl font-bold text-white">Team Lead, ML Research Engineer II</h3>
-                        <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline magnetic-btn" data-preview="Bondstein Technologies - Leading AI/ML solutions provider">Bondstein Technologies Ltd.</a> (<a href="https://www.runnerbd.com/runner-group/" target="_blank" class="hover:underline magnetic-btn" data-preview="Runner Group - Major business conglomerate in Bangladesh">Runner Group</a>) | Dhaka, Bangladesh</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                        <p class="text-sm text-gray-400">Jul 2023 - Jun 2025 (<strong>2 years</strong>)</p>
+                        <h3 class="text-xl font-bold mt-1">Team Lead, ML Research Engineer II</h3>
+                        <p class="text-gray-300"><a href="https://bondstein.com/" target="_blank" class="matrix-text hover:underline" data-preview="Bondstein Technologies">Bondstein Technologies Ltd.</a> | Dhaka, Bangladesh</p>
+                        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1 pl-4">
                             <li>Led cross-functional AI/ML team of 9 engineers with 95% project success rate.</li>
                             <li>Managed R&D budgets for AI infrastructure and edge devices.</li>
                             <li>Deployed AI monitoring system processing 82 live camera streams across 18 locations.</li>
                             <li>Architected multi-modal AI systems integrating LLAVA, LLAMA, and YOLO models.</li>
                         </ul>
                     </div>
-                     <!-- Experience Item -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <p class="text-sm text-gray-400">Jan 2023 - Jun 2023 <span class="duration-highlight">(6 months)</span></p>
-                        <h3 class="text-xl font-bold text-white">ML Research Engineer I</h3>
-                        <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline magnetic-btn" data-preview="Bondstein Technologies - Leading AI/ML solutions provider">Bondstein Technologies Ltd.</a> | Dhaka, Bangladesh</p>
-                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                        <p class="text-sm text-gray-400">Jan 2023 - Jun 2023 (<strong>6 months</strong>)</p>
+                        <h3 class="text-xl font-bold mt-1">ML Research Engineer I</h3>
+                        <p class="text-gray-300"><a href="https://bondstein.com/" target="_blank" class="matrix-text hover:underline" data-preview="Bondstein Technologies">Bondstein Technologies Ltd.</a> | Dhaka, Bangladesh</p>
+                        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1 pl-4">
                             <li>Built intelligent parking system achieving 95.47% number plate recognition.</li>
                             <li>Developed Driver Monitoring System presented at BASIS SoftExpo 2023.</li>
                             <li>Designed TV habit monitoring solution with 98.23% accuracy for consumer behavior analysis.</li>
                         </ul>
                     </div>
-                    <!-- Experience Item -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <p class="text-sm text-gray-400">Feb 2022 - Dec 2022 <span class="duration-highlight">(11 months)</span></p>
-                        <h3 class="text-xl font-bold text-white">Lead AI Engineer</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline magnetic-btn" data-preview="eaaasy - German AI startup focused on intelligent automation">eaaasy</a> (<a href="https://staffus.zohorecruit.eu/jobs/Careers" target="_blank" class="hover:underline magnetic-btn" data-preview="staffus GmbH - Technology consulting and recruitment company">staffus GmbH</a>) | Munich, Germany (Remote)</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                        <p class="text-sm text-gray-400">Feb 2022 - Dec 2022 (<strong>11 months</strong>)</p>
+                        <h3 class="text-xl font-bold mt-1">Lead AI Engineer</h3>
+                        <p class="text-gray-300"><a href="https://www.eaaasy.de/" target="_blank" class="matrix-text hover:underline" data-preview="eaaasy">eaaasy</a> | Munich, Germany (Remote)</p>
+                        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1 pl-4">
                             <li>Led AI team of 5 engineers for MVP development and technical recruitment.</li>
                             <li>Developed real-time brand logo detection using YOLOv5 (96.71% accuracy).</li>
                             <li>Deployed ML models on AWS and GCP using Docker and CI/CD pipelines.</li>
                         </ul>
                     </div>
-                     <!-- Experience Item -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <p class="text-sm text-gray-400">Jul 2021 - Jan 2022 <span class="duration-highlight">(7 months)</span></p>
-                        <h3 class="text-xl font-bold text-white">AI Engineer</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline magnetic-btn" data-preview="eaaasy - German AI startup focused on intelligent automation">eaaasy</a> | Munich, Germany (Remote)</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                        <p class="text-sm text-gray-400">Jul 2021 - Jan 2022 (<strong>7 months</strong>)</p>
+                        <h3 class="text-xl font-bold mt-1">AI Engineer</h3>
+                        <p class="text-gray-300"><a href="https://www.eaaasy.de/" target="_blank" class="matrix-text hover:underline" data-preview="eaaasy">eaaasy</a> | Munich, Germany (Remote)</p>
+                        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1 pl-4">
                             <li>Created four end-to-end recommendation systems using content-based and collaborative filtering.</li>
                             <li>Deployed systems using Flask, Google Cloud Run, and Docker.</li>
                         </ul>
                     </div>
-                    <!-- Experience Item -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <p class="text-sm text-gray-400">Jan 2021 - Jun 2021 <span class="duration-highlight">(6 months)</span></p>
-                        <h3 class="text-xl font-bold text-white">IT Project Manager & Business Intelligence Analyst</h3>
-                        <p class="font-semibold matrix-text"><a href="https://ecomclips.com/" target="_blank" class="hover:underline magnetic-btn" data-preview="Ecomclips - E-commerce development and digital marketing agency">Ecomclips</a> | Dhaka, Bangladesh</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
+                        <p class="text-sm text-gray-400">Jan 2021 - Jun 2021 (<strong>6 months</strong>)</p>
+                        <h3 class="text-xl font-bold mt-1">IT Project Manager & Business Intelligence Analyst</h3>
+                        <p class="text-gray-300"><a href="https://ecomclips.com/" target="_blank" class="matrix-text hover:underline" data-preview="Ecomclips">Ecomclips</a> | Dhaka, Bangladesh</p>
+                        <ul class="mt-3 list-disc list-inside text-gray-300 space-y-1 pl-4">
                             <li>Managed multi-platform e-commerce projects across Shopify and WooCommerce.</li>
                             <li>Implemented analytics solutions using Tableau and Power BI for performance monitoring.</li>
                         </ul>
@@ -696,14 +369,14 @@
                 </div>
             </div>
         </section>
+
         <!-- Skills Section -->
         <section id="skills" class="py-20 section-fade-in">
-             <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">TECHNICAL_SKILLS.exe</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-sm">
+            <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-10">Technical Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">Programming:</h3>
+                        <h3 class="font-bold mb-3">Programming:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">Python</span>
                             <span class="skill-tag">Java</span>
@@ -714,7 +387,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">AI/ML Frameworks:</h3>
+                        <h3 class="font-bold mb-3">AI/ML Frameworks:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">PyTorch</span>
                             <span class="skill-tag">TensorFlow</span>
@@ -725,7 +398,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">Computer Vision:</h3>
+                        <h3 class="font-bold mb-3">Computer Vision:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">LLAVA</span>
                             <span class="skill-tag">OpenCV</span>
@@ -734,7 +407,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">NLP & LLMs:</h3>
+                        <h3 class="font-bold mb-3">NLP & LLMs:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">BERT</span>
                             <span class="skill-tag">GPT</span>
@@ -744,7 +417,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">Cloud & MLOps:</h3>
+                        <h3 class="font-bold mb-3">Cloud & MLOps:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">AWS</span>
                             <span class="skill-tag">GCP</span>
@@ -755,7 +428,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">Data & Analytics:</h3>
+                        <h3 class="font-bold mb-3">Data & Analytics:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">Pandas</span>
                             <span class="skill-tag">NumPy</span>
@@ -765,1050 +438,165 @@
                             <span class="skill-tag">Power BI</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interesting Projects Section -->
+        <section id="interesting-projects" class="py-20 section-fade-in">
+            <div class="section-container">
+                <h2 class="text-3xl font-bold text-center mb-10">Notable Projects</h2>
+                <div class="space-y-8">
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">Databases:</h3>
-                        <div class="flex flex-wrap gap-1">
-                            <span class="skill-tag">PostgreSQL</span>
-                            <span class="skill-tag">MySQL</span>
-                            <span class="skill-tag">MongoDB</span>
-                            <span class="skill-tag">Redis</span>
-                        </div>
+                        <h3 class="text-xl font-bold mb-3">Container Tracking Solution</h3>
+                        <p class="text-gray-300 mb-2"><strong>Problem:</strong> Track container IDs in real-time as they are moved by stackers and trucks in a private depot.</p>
+                        <p class="text-gray-300 mb-2"><strong>Solution:</strong> Developed a custom YOLO model for real-time OCR of container IDs and movement detection, deployed on edge devices.</p>
+                        <p class="text-gray-300"><strong>Result:</strong> Enabled live location updates on a customized depot map, improving operational efficiency.</p>
                     </div>
                     <div class="project-card">
-                        <h3 class="font-bold text-white mb-3">Edge Computing:</h3>
-                        <div class="flex flex-wrap gap-1">
-                            <span class="skill-tag">ONNX</span>
-                            <span class="skill-tag">Model Quantization</span>
-                            <span class="skill-tag">NVIDIA Jetson</span>
-                        </div>
+                        <h3 class="text-xl font-bold mb-3">Portable Voice and Vision Assistant</h3>
+                        <p class="text-gray-300 mb-2"><strong>Problem:</strong> Create a device to assist visually impaired users with image explanation and voice commands.</p>
+                        <p class="text-gray-300 mb-2"><strong>Solution:</strong> Utilized Hugging Face models for vision and voice processing, deployed on an edge device with Docker containers.</p>
+                        <p class="text-gray-300"><strong>Result:</strong> Delivered a portable assistant with map directions, weather updates, and document scanning capabilities.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold mb-3">Deepfake for Wholesaler Campaign</h3>
+                        <p class="text-gray-300 mb-2"><strong>Problem:</strong> Personalize 30-minute video scripts for 6,000+ wholesalers in 4 days.</p>
+                        <p class="text-gray-300 mb-2"><strong>Solution:</strong> Used GCP for Text-to-Speech, voice cloning, and lip-sync APIs to automate video generation.</p>
+                        <p class="text-gray-300"><strong>Result:</strong> Successfully delivered 6,000+ personalized videos for a nationwide campaign.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Most Interesting Projects Section -->
-        <section id="interesting-projects" class="py-20 section-fade-in">
-            <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">MOST_INTERESTING_PROJECTS.log</h2>
-                <div class="space-y-12">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">Container Tracking Solution</h3>
-                        <div class="space-y-4 text-gray-300">
-                            <div>
-                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
-                                <p>Track container IDs in real-time as they are moved by stackers and trucks in a private depot, identify their floor locations for pickup and drop-off, and update a live location on a customized depot map.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
-                                <p>Set up cameras at gates and on stackers to record streams. Extracted frames to develop a custom YOLO model for real-time OCR of container IDs and movement detection. Deployed on edge devices connected via LAN, using a private network for data communication through custom APIs.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
-                                <p>Challenges included hectic on-premise deployments in a remote area, procurement of expensive edge devices, and model accuracy drops on smaller hardware. Solved by retraining models with more data, using model pruning, and arranging local accommodation for resources.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">Portable Voice and Vision Assistant</h3>
-                        <div class="space-y-4 text-gray-300">
-                             <div>
-                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
-                                <p>Create a device to explain images through its camera and provide prompt answers by listening to voice commands. It needed functionalities like map directions, weather updates, document scanning, and book reading, primarily for visually impaired users.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
-                                <p>Utilized pretrained models from Hugging Face for vision and voice processing, deployed on an edge device. A custom API sends images to a VM for processing, and responses are sent back. Used multiple Docker containers for different APIs and a central VM for the database. Extended functionality to drones.</p>
-                            </div>
-                             <div>
-                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
-                                <p>The primary issue was internet dependency, causing slow responses. This was resolved by integrating 5G GSM support into the edge board for a faster, more reliable connection.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">Deepfake for Wholesaler Campaign</h3>
-                        <div class="space-y-4 text-gray-300">
-                             <div>
-                                <h4 class="font-semibold matrix-text">// PROBLEM_STATEMENT</h4>
-                                <p>A celebrity needed to record a personalized 30-minute script for over 6,000 wholesalers on a tight 4-day schedule for a nationwide campaign, an impossible task with manual recording and editing.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold matrix-text">// SOLVING_STRATEGY</h4>
-                                <p>Used GCP for Text-to-Speech generation of names, a voice cloning API to match the celebrity's specific Bangla dialect, and a lip-sync API for video generation. Scripted the process to crop and merge the generated clips into the original studio recording, automating the creation of 6,000+ personalized videos.</p>
-                            </div>
-                             <div>
-                                <h4 class="font-semibold matrix-text">// ISSUES_FACED & RESOLUTION</h4>
-                                <p>Difficult name pronunciations and precise lip-sync timing were major hurdles. Overcame these through continuous iteration, quality monitoring by the team, and refining the video processing scripts to ensure seamless transitions.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Industrial Projects Section -->
-        <section id="industrial-projects" class="py-20 section-fade-in">
-            <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">DETAILS_OF_INDUSTRIAL_PROJECTS.dat</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="project-card magnetic-btn">
-                        <h3 class="text-xl font-bold text-white">AI Surveillance for Financial Institution</h3>
-                        <p class="text-gray-400 mt-2">Developed a system featuring Bangla aggressive audio detection, custom object/face recognition, and violence detection integrated with real-time notifications.</p>
-                    </div>
-                    <div class="project-card magnetic-btn">
-                        <h3 class="text-xl font-bold text-white">Automated Lip Sync & Voice Cloning Campaign</h3>
-                        <p class="text-gray-400 mt-2">Designed and deployed a complete pipeline leveraging multiple APIs and cloud resources to deliver over 6,600 personalized, lip-synced videos for a large-scale campaign.</p>
-                    </div>
-                    <div class="project-card magnetic-btn">
-                        <h3 class="text-xl font-bold text-white">Tobacco Leaf SOP Checker</h3>
-                        <p class="text-gray-400 mt-2">Architected a system with 13 custom classification/detection models deployed across more than 40 sites to ensure compliance with standard operating procedures.</p>
-                    </div>
-                    <div class="project-card magnetic-btn">
-                        <h3 class="text-xl font-bold text-white">Real-Time Face Recognition Monitoring</h3>
-                        <p class="text-gray-400 mt-2">Developed a Siamese network with YOLOv8 for real-time face detection and recognition, optimized for extended operation in high-traffic environments.</p>
-                    </div>
-                    <div class="project-card magnetic-btn">
-                        <h3 class="text-xl font-bold text-white">Predictive Analytics for Production & Network</h3>
-                        <p class="text-gray-400 mt-2">Implemented regression and ML models for production forecasting and network data analysis, delivering detailed performance reports.</p>
-                    </div>
-                     <div class="project-card magnetic-btn">
-                        <h3 class="text-xl font-bold text-white">Human Crowd Monitoring & Smart Parking</h3>
-                        <p class="text-gray-400 mt-2">Built fusion models for crowd tracking and smart parking systems, achieving high detection accuracies of 97% and 95%, respectively.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Personal Projects Section -->
-        <section id="personal-projects" class="py-20 section-fade-in">
-             <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold text-center mb-12 matrix-text">NOTABLE_PERSONAL_PROJECTS.bin</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <h3 class="text-xl font-bold text-white">Enterprise CCTV Face Extraction</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Utilized Multi-Task Cascaded Convolutional Neural Networks (MTCNN) and OpenCV for high-accuracy face extraction from surveillance footage.</p>
-                        <a href="https://github.com/anmsajedulalam/Extracting-faces-from-cc-footage-using-Multi-Task-Cascaded-Convolutional-Neural-Networks-and-OpenCV" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository featuring MTCNN implementation for CCTV face extraction">ACCESS_SOURCE ></a>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <h3 class="text-xl font-bold text-white">Healthcare EHR Classification Pipeline</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Developed a robust pipeline for classifying patient severity states from Electronic Health Record (EHR) data using ML and Deep Learning.</p>
-                        <a href="https://github.com/anmsajedulalam/Patients-Severity-States-Classification-based-on-EHR-Data-using-Multiple-Machine-and-Deep-Learning" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for EHR classification using ML and DL">ACCESS_SOURCE ></a>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <h3 class="text-xl font-bold text-white">Generative AI Image Systems</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Built an Img2Img generator using Stable Diffusion with Diffusers from Hugging Face, exploring advanced generative capabilities.</p>
-                        <a href="https://github.com/anmsajedulalam/Img2Img-Generator-using-Stable-Diffusion-with-Diffusers-from-Hugging-Face" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for Stable Diffusion Img2Img generator">ACCESS_SOURCE ></a>
-                    </div>
-                    <!-- Project 4 -->
-                    <div class="project-card">
-                        <h3 class="text-xl font-bold text-white">PDF Resume Data Extraction</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Created a system for automatically parsing and extracting structured information from resumes in PDF format.</p>
-                        <a href="https://github.com/anmsajedulalam/Data-Extraction-from-PDF-files-of-Resume" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for PDF resume data extraction">ACCESS_SOURCE ></a>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Publications Section -->
         <section id="publications" class="py-20 section-fade-in">
-             <div class="section-container">
-                <div class="data-stream"></div>
-                <h2 class="text-3xl font-bold mb-8 matrix-text">PUBLICATIONS_ARCHIVE.dat</h2>
+            <div class="section-container">
+                <h2 class="text-3xl font-bold mb-8">Publications</h2>
                 <div class="space-y-4">
-                    <p><strong class="text-white">Comparison of Multiple Machine Learning Approaches in Spam Detection</strong> - <a href="https://link.springer.com/chapter/10.1007/978-3-031-12638-3_4" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="Springer Nature publication on spam detection using ML">Springer Nature (ICACDS 2022)</a></p>
-                    <p><strong class="text-white">Implementation of Explainable AI in Mental Health Informatics</strong> - <a href="https://ieeexplore.ieee.org/document/10088765" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="IEEE publication on explainable AI in mental health">IEEE ICECE 2022</a></p>
-                    <p><strong class="text-white">Patients' Severity States Classification using ML & DL Approaches</strong> - <a href="https://arxiv.org/abs/2209.14907" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="arXiv paper on patient severity classification">arXiv:2209.14907</a></p>
-                    <p><strong class="text-white">A Machine Learning Approach to Credit Default Prediction</strong> - <a href="http://dspace.bracu.ac.bd/xmlui/handle/10361/10956" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="Undergraduate thesis on credit default prediction">Undergraduate Thesis</a></p>
-                    <p><strong class="text-white">A Survey: Implementations of NFT System in Different Fields</strong> - <a href="https://arxiv.org/abs/2209.15288" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="arXiv survey on NFT implementations">arXiv:2209.15288</a></p>
+                    <p><strong>Comparison of Multiple Machine Learning Approaches in Spam Detection</strong> - <a href="https://link.springer.com/chapter/10.1007/978-3-031-12638-3_4" target="_blank" class="matrix-text hover:underline" data-preview="Springer Nature">Springer Nature (ICACDS 2022)</a></p>
+                    <p><strong>Implementation of Explainable AI in Mental Health Informatics</strong> - <a href="https://ieeexplore.ieee.org/document/10088765" target="_blank" class="matrix-text hover:underline" data-preview="IEEE">IEEE ICECE 2022</a></p>
+                    <p><strong>Patients' Severity States Classification using ML & DL Approaches</strong> - <a href="https://arxiv.org/abs/2209.14907" target="_blank" class="matrix-text hover:underline" data-preview="arXiv">arXiv:2209.14907</a></p>
                 </div>
             </div>
         </section>
     </main>
     <!-- Footer -->
-    <footer class="border-t border-gray-800 relative">
-        <div class="neural-bg">
-            <canvas id="footer-neural"></canvas>
-        </div>
-        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+    <footer class="border-t border-gray-800 py-8 text-center text-gray-500">
+        <div class="container mx-auto px-6">
             <p class="text-sm">Last Updated: <span id="compile-date"></span></p>
             <p class="text-sm">&copy; A. N. M. SAJEDUL ALAM. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Calculate Total Experience
-        function calculateTotalExperience() {
-            // Jul 2023 - Jun 2025: 2 years
-            // Jan 2023 - Jun 2023: 0.5 years
-            // Feb 2022 - Dec 2022: 11 months (~0.92 years)
-            // Jul 2021 - Jan 2022: 7 months (~0.58 years)
-            // Jan 2021 - Jun 2021: 6 months (0.5 years)
-            const totalYears = 2 + 0.5 + 0.92 + 0.58 + 0.5;
-            return totalYears.toFixed(1) + "+ years";
+        // Typing Effect
+        const typingElement = document.getElementById('typing-effect');
+        const textToType = "A. N. M. Sajedul Alam";
+        let index = 0;
+        function type() {
+            if (index < textToType.length) {
+                typingElement.innerHTML = textToType.substring(0, index + 1) + '<span class="type-cursor"></span>';
+                index++;
+                setTimeout(type, 120);
+            } else {
+                typingElement.innerHTML = textToType + '<span class="type-cursor"></span>';
+            }
         }
+        type();
 
         // Link Preview System
         function showLinkPreview(element, url) {
             const preview = document.getElementById('link-preview');
-            const loader = document.getElementById('preview-loader');
-            const content = document.getElementById('preview-content');
             const title = document.getElementById('preview-title');
             const description = document.getElementById('preview-description');
-
-            // Reset
-            loader.style.display = 'block';
-            content.style.display = 'none';
-
-            // Position preview near the element
             const rect = element.getBoundingClientRect();
             preview.style.left = (rect.left + window.scrollX) + 'px';
             preview.style.top = (rect.top + window.scrollY - 10) + 'px';
-
-            // Show preview
+            title.textContent = element.getAttribute('data-preview') || "Preview";
+            description.textContent = url || "Click to visit";
             preview.classList.add('visible');
-
-            // Simulate loading
-            setTimeout(() => {
-                loader.style.display = 'none';
-                content.style.display = 'block';
-
-                // Set content based on data-preview or URL
-                if (element.hasAttribute('data-preview')) {
-                    title.textContent = "Preview";
-                    description.textContent = element.getAttribute('data-preview');
-                } else {
-                    title.textContent = "Link";
-                    description.textContent = "Click to visit: " + url;
-                }
-            }, 300);
         }
-
         function hideLinkPreview() {
-            const preview = document.getElementById('link-preview');
-            preview.classList.remove('visible');
+            document.getElementById('link-preview').classList.remove('visible');
         }
-
-        // Magnetic Button Effect
-        function addMagneticEffect(element) {
-            element.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-
-                const distance = Math.sqrt(x * x + y * y);
-                const maxDistance = 50;
-
-                if (distance < maxDistance) {
-                    const force = (maxDistance - distance) / maxDistance;
-                    const moveX = x * force * 0.3;
-                    const moveY = y * force * 0.3;
-
-                    this.style.transform = `translate(${moveX}px, ${moveY}px) scale(${1 + force * 0.1})`;
-                }
+        document.querySelectorAll('a[href], [data-preview]').forEach(link => {
+            let hoverTimer;
+            link.addEventListener('mouseenter', function(e) {
+                hoverTimer = setTimeout(() => {
+                    const url = this.href || this.getAttribute('data-preview');
+                    showLinkPreview(this, url);
+                }, 300);
             });
-
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = '';
+            link.addEventListener('mouseleave', function() {
+                clearTimeout(hoverTimer);
+                hideLinkPreview();
             });
-        }
+        });
 
-        // Matrix Rain Effect with Enhanced Physics
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const halfwidth = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ';
-        const symbols = '・。「」、・￥£€$¢₹₽₿';
-        const numbers = '0123456789';
-        const specialChars = ':|"<>!@#$%^&*()_+-=[]{}\\|;\':",./<>?`~';
-        const alphabet = katakana + halfwidth + symbols + numbers + specialChars;
-        const fontSize = 16;
-        let columns = Math.floor(canvas.width / fontSize);
-        let particles = [];
-        let animationFrameId;
-        let matrixEffectEnabled = true;
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
 
-        // Enhanced mouse interaction with physics
-        const mouse = {
-            x: undefined,
-            y: undefined,
-            radius: 150,
-            force: 12
-        };
-
-        function getCanvasMousePos(event) {
-            const rect = canvas.getBoundingClientRect();
-            return {
-                x: event.clientX - rect.left,
-                y: event.clientY - rect.top
-            };
-        }
-
-        // Particle Trail System
-        let trails = [];
-        function createParticleTrail(x, y) {
-            const trail = document.createElement('div');
-            trail.className = 'particle-trail';
-            trail.style.left = x + 'px';
-            trail.style.top = y + 'px';
-            document.body.appendChild(trail);
-
-            setTimeout(() => {
-                document.body.removeChild(trail);
-            }, 1000);
-        }
-
-        let lastTrailTime = 0;
-        window.addEventListener('mousemove', function(event) {
-            const pos = getCanvasMousePos(event);
-            mouse.x = pos.x;
-            mouse.y = pos.y;
-
-            // Create particle trails
-            const now = Date.now();
-            if (now - lastTrailTime > 50) {
-                createParticleTrail(event.clientX, event.clientY);
-                lastTrailTime = now;
+        // Projects Dropdown
+        const projectsDropdownButton = document.getElementById('projects-dropdown-button');
+        const projectsDropdownMenu = document.getElementById('projects-dropdown-menu');
+        projectsDropdownButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            projectsDropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (e) => {
+            if (!projectsDropdownMenu.contains(e.target) && e.target !== projectsDropdownButton) {
+                projectsDropdownMenu.classList.add('hidden');
             }
         });
 
-        window.addEventListener('mouseout', function() {
-            mouse.x = undefined;
-            mouse.y = undefined;
+        // Mobile Projects Dropdown
+        const mobileProjectsButton = document.getElementById('mobile-projects-button');
+        const mobileProjectsMenu = document.getElementById('mobile-projects-menu');
+        mobileProjectsButton.addEventListener('click', () => {
+            mobileProjectsMenu.classList.toggle('hidden');
         });
 
-        // Enhanced Matrix Stream class
-        class MatrixStream {
-            constructor(x, canvasHeight, fontSize) {
-                this.x = x;
-                this.baseX = x;
-                this.offsetX = 0;
-                this.velocityX = 0;
-                this.velocityY = 0;
-                this.canvasHeight = canvasHeight;
-                this.fontSize = fontSize;
-
-                this.characters = [];
-                this.length = Math.floor(Math.random() * 30) + 15;
-                this.speed = Math.random() * 1.2 + 0.6;
-                this.y = Math.random() * -this.length * this.fontSize;
-
-                // Physics properties
-                this.mass = Math.random() * 2 + 1;
-                this.friction = 0.95;
-                this.springStrength = 0.02;
-
-                this.initializeStream();
-
-                this.changeTimer = 0;
-                this.changeInterval = Math.random() * 60 + 30;
-            }
-
-            initializeStream() {
-                this.characters = [];
-                for (let i = 0; i < this.length; i++) {
-                    this.characters.push({
-                        char: alphabet.charAt(Math.floor(Math.random() * alphabet.length)),
-                        opacity: this.calculateOpacity(i),
-                        shouldChange: Math.random() < 0.4,
-                        glitchTimer: Math.random() * 100
-                    });
-                }
-            }
-
-            calculateOpacity(index) {
-                const position = index / this.length;
-                if (index === 0) {
-                    return 1.0;
-                } else if (index < 4) {
-                    return 0.95 - (index * 0.12);
-                } else {
-                    return Math.max(0.05, 0.7 * Math.pow(0.88, index - 3));
-                }
-            }
-
-            draw(context) {
-                for (let i = 0; i < this.characters.length; i++) {
-                    const char = this.characters[i];
-                    const yPos = this.y + (i * this.fontSize);
-
-                    if (yPos > 0 && yPos < this.canvasHeight + this.fontSize) {
-                        const brightness = char.opacity;
-
-                        // Enhanced visual effects
-                        if (i === 0) {
-                            context.fillStyle = `rgba(255, 255, 255, ${brightness})`;
-                            context.shadowColor = '#00FF41';
-                            context.shadowBlur = 10;
-                        } else if (i < 3) {
-                            context.fillStyle = `rgba(100, 255, 218, ${brightness})`;
-                            context.shadowBlur = 5;
-                        } else {
-                            context.fillStyle = `rgba(0, 255, 65, ${brightness})`;
-                            context.shadowBlur = 2;
-                        }
-
-                        context.font = `${this.fontSize}px monospace`;
-                        context.fillText(char.char, this.x, yPos);
-                        context.shadowBlur = 0;
-                    }
-                }
-            }
-
-            update() {
-                // Enhanced physics simulation
-                this.y += this.speed + this.velocityY;
-
-                if (this.y > this.canvasHeight + (this.length * this.fontSize)) {
-                    this.y = Math.random() * -this.length * this.fontSize * 3;
-                    this.x = this.baseX;
-                    this.offsetX = 0;
-                    this.velocityX = 0;
-                    this.velocityY = 0;
-                    this.length = Math.floor(Math.random() * 30) + 15;
-                    this.speed = Math.random() * 1.2 + 0.6;
-                    this.initializeStream();
-                }
-
-                // Character mutations with glitch effects
-                this.changeTimer++;
-                if (this.changeTimer >= this.changeInterval) {
-                    this.changeTimer = 0;
-                    this.changeInterval = Math.random() * 60 + 30;
-
-                    for (let i = 0; i < this.characters.length; i++) {
-                        if (this.characters[i].shouldChange && Math.random() < 0.4) {
-                            this.characters[i].char = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                        }
-
-                        // Glitch effect
-                        this.characters[i].glitchTimer++;
-                        if (this.characters[i].glitchTimer > 200 && Math.random() < 0.02) {
-                            this.characters[i].char = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                            this.characters[i].glitchTimer = 0;
-                        }
-                    }
-                }
-
-                // Enhanced mouse physics
-                if (mouse.x !== undefined && mouse.y !== undefined) {
-                    const streamHeadY = this.y;
-                    let dx = this.x - mouse.x;
-                    let dy = streamHeadY - mouse.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        const forceDirectionX = dx / distance;
-                        const forceDirectionY = dy / distance;
-                        const maxForce = (mouse.radius - distance) / mouse.radius;
-
-                        const repulsionStrength = mouse.force;
-                        const force = Math.pow(maxForce, 0.6) * repulsionStrength;
-
-                        // Apply physics forces
-                        this.velocityX += (forceDirectionX * force) / this.mass;
-                        this.velocityY += (forceDirectionY * force * 0.3) / this.mass;
-
-                        // Add turbulence
-                        this.velocityX += (Math.random() - 0.5) * 0.8;
-                        this.velocityY += (Math.random() - 0.5) * 0.4;
-                    }
-                }
-
-                // Apply velocities and physics
-                this.offsetX += this.velocityX;
-                this.x = this.baseX + this.offsetX;
-
-                // Spring force to return to original position
-                const springForce = -this.offsetX * this.springStrength;
-                this.velocityX += springForce;
-
-                // Apply friction
-                this.velocityX *= this.friction;
-                this.velocityY *= this.friction;
-
-                // Boundary constraints
-                const maxOffset = canvas.width * 0.4;
-                if (Math.abs(this.offsetX) > maxOffset) {
-                    this.offsetX = Math.sign(this.offsetX) * maxOffset;
-                    this.velocityX *= -0.3;
-                }
-            }
-        }
-
-        // Neural Network Background
-        function drawNeuralNetwork(canvas, ctx) {
-            const nodes = [];
-            const nodeCount = 20;
-
-            // Create nodes
-            for (let i = 0; i < nodeCount; i++) {
-                nodes.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            }
-
-            function animateNetwork() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // Update and draw nodes
-                nodes.forEach((node, i) => {
-                    node.x += node.vx;
-                    node.y += node.vy;
-
-                    // Bounce off edges
-                    if (node.x <= 0 || node.x >= canvas.width) node.vx *= -1;
-                    if (node.y <= 0 || node.y >= canvas.height) node.vy *= -1;
-
-                    // Draw connections
-                    nodes.forEach((otherNode, j) => {
-                        if (i !== j) {
-                            const dx = node.x - otherNode.x;
-                            const dy = node.y - otherNode.y;
-                            const distance = Math.sqrt(dx * dx + dy * dy);
-
-                            if (distance < 150) {
-                                ctx.strokeStyle = `rgba(0, 255, 65, ${0.3 * (1 - distance / 150)})`;
-                                ctx.lineWidth = 1;
-                                ctx.beginPath();
-                                ctx.moveTo(node.x, node.y);
-                                ctx.lineTo(otherNode.x, otherNode.y);
-                                ctx.stroke();
-                            }
-                        }
-                    });
-
-                    // Draw node
-                    ctx.fillStyle = 'rgba(0, 255, 65, 0.6)';
-                    ctx.beginPath();
-                    ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
-                requestAnimationFrame(animateNetwork);
-            }
-
-            animateNetwork();
-        }
-
-        function init() {
-            particles = [];
-            columns = Math.floor(canvas.width / fontSize);
-            for (let i = 0; i < columns; i++) {
-                particles.push(new MatrixStream(i * fontSize, canvas.height, fontSize));
-            }
-        }
-
-        function animate() {
-            if (!matrixEffectEnabled) return;
-
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(stream => {
-                stream.update();
-                stream.draw(ctx);
             });
-            animationFrameId = requestAnimationFrame(animate);
-        }
+        });
 
-        function startMatrix() {
-            if (animationFrameId) return;
-            canvas.style.opacity = '0.3';
-            init();
-            animate();
-        }
-
-        function stopMatrix() {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
-            }
-            canvas.style.opacity = '0';
-            setTimeout(() => {
-                if(!matrixEffectEnabled) ctx.clearRect(0, 0, canvas.width, canvas.height)
-            }, 500);
-        }
+        // Fade-in Sections
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
 
         // Progress Bar
-        function updateProgressBar() {
+        window.addEventListener('scroll', () => {
             const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.getElementById('progress-bar').style.width = scrolled + '%';
-        }
-
-        window.addEventListener('resize', () => {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
-            }
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            if (matrixEffectEnabled) {
-                startMatrix();
-            }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Calculate and display total experience
-            const totalExp = calculateTotalExperience();
-            document.getElementById('total-experience').textContent = totalExp;
-            document.getElementById('summary-experience').textContent = totalExp;
-            document.getElementById('calculated-experience').textContent = totalExp;
-
-            startMatrix();
-
-            // Initialize neural network backgrounds
-            const neuralCanvas = document.getElementById('neural-network');
-            const footerNeuralCanvas = document.getElementById('footer-neural');
-
-            if (neuralCanvas) {
-                neuralCanvas.width = neuralCanvas.parentElement.clientWidth;
-                neuralCanvas.height = neuralCanvas.parentElement.clientHeight;
-                drawNeuralNetwork(neuralCanvas, neuralCanvas.getContext('2d'));
-            }
-
-            if (footerNeuralCanvas) {
-                footerNeuralCanvas.width = footerNeuralCanvas.parentElement.clientWidth;
-                footerNeuralCanvas.height = 200;
-                drawNeuralNetwork(footerNeuralCanvas, footerNeuralCanvas.getContext('2d'));
-            }
-
-            // Enhanced Interactive Name Characters
-            const nameChars = document.querySelectorAll('.name-char');
-            const animations = ['char-pulse', 'char-shake', 'char-bounce', 'char-spiral', 'char-flip'];
-
-            nameChars.forEach((char, index) => {
-                char.addEventListener('mouseenter', function(e) {
-                    this.classList.remove(...animations, 'char-ripple');
-                    this.classList.add('char-ripple');
-
-                    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-
-                    setTimeout(() => {
-                        this.classList.add(randomAnimation);
-                    }, 50);
-
-                    // Enhanced chain reaction
-                    const proximityRange = 3;
-                    nameChars.forEach((nearbyChar, nearbyIndex) => {
-                        const distance = Math.abs(index - nearbyIndex);
-                        if (distance > 0 && distance <= proximityRange) {
-                            const intensity = (proximityRange - distance) / proximityRange;
-                            setTimeout(() => {
-                                nearbyChar.style.transform = `scale(${1 + (0.15 * intensity)}) translateY(${-4 * intensity}px) rotate(${2 * intensity}deg)`;
-                                nearbyChar.style.textShadow = `0 0 ${8 * intensity}px var(--matrix-green)`;
-                                nearbyChar.style.filter = `brightness(${1 + (0.3 * intensity)})`;
-                            }, distance * 80);
-
-                            setTimeout(() => {
-                                nearbyChar.style.transform = '';
-                                nearbyChar.style.textShadow = '';
-                                nearbyChar.style.filter = '';
-                            }, 400 + (distance * 80));
-                        }
-                    });
-                });
-
-                char.addEventListener('mouseleave', function() {
-                    setTimeout(() => {
-                        this.classList.remove(...animations, 'char-ripple');
-                    }, 800);
-                });
-
-                char.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    this.classList.remove(...animations, 'char-ripple');
-
-                    // Explosive click effect
-                    this.style.transform = 'scale(2) rotate(720deg) translateY(-25px)';
-                    this.style.textShadow = '0 0 30px var(--matrix-green), 0 0 60px var(--matrix-green), 0 0 90px var(--accent-blue)';
-                    this.style.color = '#ffffff';
-                    this.style.filter = 'brightness(2) hue-rotate(45deg)';
-
-                    // Massive explosion effect
-                    nameChars.forEach((explosionChar, explosionIndex) => {
-                        const distance = Math.abs(index - explosionIndex);
-                        if (distance > 0 && distance <= 6) {
-                            const force = 8 - distance;
-                            const direction = explosionIndex > index ? 1 : -1;
-                            const randomness = (Math.random() - 0.5) * 2;
-
-                            setTimeout(() => {
-                                explosionChar.style.transform = `translateX(${direction * force * 4 + randomness * 10}px) translateY(${-force * 2}px) scale(${1 + force * 0.08}) rotate(${direction * force * 3 + randomness * 15}deg)`;
-                                explosionChar.style.textShadow = `0 0 ${force * 5}px var(--matrix-green)`;
-                                explosionChar.style.filter = `brightness(${1 + force * 0.2}) hue-rotate(${force * 10}deg)`;
-                            }, distance * 30);
-
-                            setTimeout(() => {
-                                explosionChar.style.transform = '';
-                                explosionChar.style.textShadow = '';
-                                explosionChar.style.filter = '';
-                            }, 1200 + (distance * 30));
-                        }
-                    });
-
-                    // Reset clicked character
-                    setTimeout(() => {
-                        this.style.transform = '';
-                        this.style.textShadow = '';
-                        this.style.color = '';
-                        this.style.filter = '';
-                    }, 1200);
-                });
-
-                char.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-
-                    const deltaX = (e.clientX - centerX) * 0.15;
-                    const deltaY = (e.clientY - centerY) * 0.15;
-
-                    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.2) rotate(${deltaX * 0.2}deg)`;
-                });
-            });
-
-            // Add magnetic effects to all magnetic buttons
-            document.querySelectorAll('.magnetic-btn').forEach(addMagneticEffect);
-
-            // Link Preview System
-            document.querySelectorAll('a[href], [data-preview]').forEach(link => {
-                let hoverTimer;
-
-                link.addEventListener('mouseenter', function(e) {
-                    hoverTimer = setTimeout(() => {
-                        const url = this.href || this.getAttribute('data-preview');
-                        showLinkPreview(this, url);
-                    }, 300);
-                });
-
-                link.addEventListener('mouseleave', function() {
-                    clearTimeout(hoverTimer);
-                    hideLinkPreview();
-                });
-            });
-
-            // Toggle Buttons with Enhanced Effects
-            const matrixToggleButton = document.getElementById('matrix-toggle');
-            const mobileMatrixToggleButton = document.getElementById('mobile-matrix-toggle');
-            function updateToggleButtons() {
-                const text = `Matrix: ${matrixEffectEnabled ? 'ON' : 'OFF'}`;
-                if (matrixToggleButton) {
-                    matrixToggleButton.textContent = text;
-                    matrixToggleButton.style.borderColor = matrixEffectEnabled ? 'var(--matrix-green)' : '#666';
-                    matrixToggleButton.style.color = matrixEffectEnabled ? 'var(--matrix-green)' : '#666';
-                }
-                if (mobileMatrixToggleButton) {
-                    mobileMatrixToggleButton.textContent = text;
-                    mobileMatrixToggleButton.style.color = matrixEffectEnabled ? 'var(--matrix-green)' : '#666';
-                }
-            }
-            function toggleMatrixEffect() {
-                matrixEffectEnabled = !matrixEffectEnabled;
-                if (matrixEffectEnabled) {
-                    startMatrix();
-                } else {
-                    stopMatrix();
-                }
-                updateToggleButtons();
-
-                // Visual feedback
-                const btn = event.target;
-                btn.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    btn.style.transform = '';
-                }, 150);
-            }
-            if (matrixToggleButton) matrixToggleButton.addEventListener('click', toggleMatrixEffect);
-            if (mobileMatrixToggleButton) mobileMatrixToggleButton.addEventListener('click', toggleMatrixEffect);
-
-            // Enhanced Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-
-            mobileMenuButton.addEventListener('click', () => {
-                const isHidden = mobileMenu.classList.toggle('hidden');
-                mobileMenuIcon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
-
-                // Animate button
-                mobileMenuButton.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    mobileMenuButton.style.transform = '';
-                }, 150);
-            });
-
-            // Close mobile menu when a link is clicked
-            const allMobileNavLinks = mobileMenu.querySelectorAll('a');
-            allMobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuIcon.style.transform = 'rotate(0deg)';
-                });
-            });
-
-            // Enhanced Smooth scroll with physics
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-
-                        // Visual feedback
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 150);
-                    }
-                });
-            });
-
-            // Intersection Observer for fade-in effects
-            const sections = document.querySelectorAll('.section-fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-            // Enhanced Typing Effect
-            const typingElement = document.getElementById('typing-effect');
-            const textToType = "A. N. M. Sajedul Alam";
-            let index = 0;
-
-            function type() {
-                if (index < textToType.length) {
-                    typingElement.innerHTML = textToType.substring(0, index + 1) + '<span class="type-cursor"></span>';
-                    index++;
-                    setTimeout(type, 120 + Math.random() * 80); // Variable speed for realism
-                } else {
-                    typingElement.innerHTML = textToType + '<span class="type-cursor"></span>';
-                }
-            }
-            type();
-
-            // Progress bar scroll tracking
-            window.addEventListener('scroll', updateProgressBar);
-
-            // Compile Date with real-time updates
-            function updateCompileDate() {
-                const now = new Date();
-                document.getElementById('compile-date').textContent = now.toUTCString();
-            }
-            updateCompileDate();
-            setInterval(updateCompileDate, 1000);
-
-            // Enhanced Dropdown menu for Projects (Desktop)
-            const projectsDropdownButton = document.getElementById('projects-dropdown-button');
-            const projectsDropdownMenu = document.getElementById('projects-dropdown-menu');
-            const projectsDropdownContainer = document.getElementById('projects-dropdown-container');
-            const dropdownArrow = document.getElementById('dropdown-arrow');
-            if (projectsDropdownButton) {
-                projectsDropdownButton.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    const isHidden = projectsDropdownMenu.classList.toggle('hidden');
-                    dropdownArrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
-
-                    // Button feedback
-                    projectsDropdownButton.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        projectsDropdownButton.style.transform = '';
-                    }, 150);
-                });
-                projectsDropdownMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        projectsDropdownMenu.classList.add('hidden');
-                        dropdownArrow.style.transform = 'rotate(0deg)';
-                    });
-                });
-            }
-            document.addEventListener('click', (event) => {
-                if (projectsDropdownContainer && !projectsDropdownContainer.contains(event.target)) {
-                    if(!projectsDropdownMenu.classList.contains('hidden')) {
-                        projectsDropdownMenu.classList.add('hidden');
-                        dropdownArrow.style.transform = 'rotate(0deg)';
-                    }
-                }
-            });
-
-            // Enhanced Mobile Projects menu toggle
-            const mobileProjectsButton = document.getElementById('mobile-projects-button');
-            const mobileProjectsMenu = document.getElementById('mobile-projects-menu');
-            const mobileProjectsArrow = document.getElementById('mobile-projects-arrow');
-            if(mobileProjectsButton){
-                mobileProjectsButton.addEventListener('click', () => {
-                    const isHidden = mobileProjectsMenu.classList.toggle('hidden');
-                    mobileProjectsArrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
-
-                    // Button feedback
-                    mobileProjectsButton.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        mobileProjectsButton.style.transform = '';
-                    }, 150);
-                });
-            }
-
-            // Skill Tag Interactions
-            document.querySelectorAll('.skill-tag').forEach(tag => {
-                tag.addEventListener('click', function() {
-                    this.style.transform = 'scale(1.2) rotate(5deg)';
-                    this.style.background = 'var(--matrix-green)';
-                    this.style.color = 'black';
-
-                    setTimeout(() => {
-                        this.style.transform = '';
-                        this.style.background = '';
-                        this.style.color = '';
-                    }, 300);
-                });
-            });
-
-            // Easter Egg - Konami Code
-            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-            let konamiIndex = 0;
-
-            document.addEventListener('keydown', (e) => {
-                if (e.code === konamiCode[konamiIndex]) {
-                    konamiIndex++;
-                    if (konamiIndex === konamiCode.length) {
-                        // Easter egg activated - Matrix overdrive mode
-                        mouse.force = 25;
-                        mouse.radius = 300;
-                        document.body.style.filter = 'hue-rotate(45deg) brightness(1.2)';
-
-                        // Create explosion of particles
-                        for (let i = 0; i < 50; i++) {
-                            setTimeout(() => {
-                                createParticleTrail(
-                                    Math.random() * window.innerWidth,
-                                    Math.random() * window.innerHeight
-                                );
-                            }, i * 50);
-                        }
-
-                        setTimeout(() => {
-                            mouse.force = 12;
-                            mouse.radius = 150;
-                            document.body.style.filter = '';
-                        }, 5000);
-
-                        konamiIndex = 0;
-                    }
-                } else {
-                    konamiIndex = 0;
-                }
-            });
-
-            // Enhanced button interactions for all interactive elements
-            document.querySelectorAll('.interactive-btn').forEach(btn => {
-                btn.addEventListener('mousedown', function() {
-                    this.style.transform = 'scale(0.95)';
-                });
-
-                btn.addEventListener('mouseup', function() {
-                    this.style.transform = '';
-                });
-
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
-            });
-
-            // Parallax effect for floating elements
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const parallaxElements = document.querySelectorAll('.floating-element');
-
-                parallaxElements.forEach((el, index) => {
-                    const speed = 0.5 + (index * 0.1);
-                    el.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
-                });
-            });
-
-            // Cursor trail enhancement
-            let cursorTrails = [];
-            const maxTrails = 20;
-
-            document.addEventListener('mousemove', (e) => {
-                // Limit trail creation frequency
-                if (Math.random() > 0.7) {
-                    const trail = {
-                        x: e.clientX,
-                        y: e.clientY,
-                        life: 1,
-                        decay: 0.02
-                    };
-
-                    cursorTrails.push(trail);
-
-                    if (cursorTrails.length > maxTrails) {
-                        cursorTrails.shift();
-                    }
-                }
-            });
-
-            // Advanced project card interactions
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02) rotateX(5deg)';
-                });
-
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
-
-                // 3D tilt effect based on mouse position
-                card.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-
-                    const rotateX = (e.clientY - centerY) / rect.height * 10;
-                    const rotateY = (e.clientX - centerX) / rect.width * 10;
-
-                    this.style.transform = `translateY(-8px) scale(1.02) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-            });
-
-            // Timeline item enhancements
-            document.querySelectorAll('.timeline-item').forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    const dot = this.querySelector('.timeline-dot');
-                    if (dot) {
-                        dot.style.animation = 'pulse 0.5s ease-in-out';
-                    }
-                });
-
-                item.addEventListener('mouseleave', function() {
-                    const dot = this.querySelector('.timeline-dot');
-                    if (dot) {
-                        dot.style.animation = '';
-                    }
-                });
-            });
-
-            // Initialize all interactive elements
-            updateToggleButtons();
-        });
+        // Update Date
+        document.getElementById('compile-date').textContent = new Date().toUTCString();
     </script>
 </body>
 </html>
