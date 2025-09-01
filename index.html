@@ -491,6 +491,36 @@
             color: var(--text-color);
             font-weight: 500;
         }
+        /* Award Badge */
+        .award-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--matrix-green), var(--accent-blue));
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px;
+            text-shadow: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        /* Certification Tag */
+        .cert-tag {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .cert-tag:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -535,6 +565,7 @@
                         </div>
                     </div>
                     <a href="#publications" class="interactive-btn hover:matrix-text transition-colors">PUBLICATIONS</a>
+                    <a href="#awards" class="interactive-btn hover:matrix-text transition-colors">AWARDS</a>
                     <button id="matrix-toggle" class="interactive-btn text-xs matrix-text border border-matrix-green rounded px-3 py-2 hover:bg-matrix-green hover:text-black transition-all duration-300 magnetic-btn">Matrix: ON</button>
                 </nav>
                 <button id="mobile-menu-button" class="md:hidden focus:outline-none magnetic-btn">
@@ -559,6 +590,7 @@
                  </div>
             </div>
             <a href="#publications" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">PUBLICATIONS</a>
+            <a href="#awards" class="block py-3 px-6 text-sm hover:bg-gray-900 hover:matrix-text transition-all duration-200">AWARDS</a>
              <div class="px-6 py-3 border-t border-gray-800 mt-2">
                 <button id="mobile-matrix-toggle" class="w-full text-left text-sm text-gray-300 hover:matrix-text interactive-btn">Matrix: ON</button>
             </div>
@@ -571,7 +603,7 @@
                 <canvas id="neural-network"></canvas>
             </div>
             <h1 id="typing-effect" class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4 floating-element"><span class="type-cursor"></span></h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl floating-element">Senior AI/ML Engineer & Technical Lead with <span class="duration-highlight" id="total-experience">4+ years</span> of leadership, specializing in intelligent automation and enterprise AI deployment.</p>
+            <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl floating-element">Senior AI/ML Engineer, Data Scientist & Technical Lead with <span class="duration-highlight" id="total-experience">4.5+ years</span> of leadership experience, specializing in intelligent automation and enterprise AI deployment across international markets.</p>
             <!-- Enhanced Social Links -->
             <div class="mb-10 floating-element">
                 <p class="text-sm matrix-text mb-4">// DIRECT_ACCESS_LINKS</p>
@@ -591,6 +623,11 @@
                         <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Google Scholar</title><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 6v5.18C4.41 10.1 9.42 8.7 12 5.43 14.58 8.7 19.59 10.1 24 11.18V6L12 0z"/></svg>
                         <span class="group-hover:matrix-text group-hover:underline">Google Scholar</span>
                     </a>
+                    <!-- ResearchGate -->
+                    <a href="https://www.researchgate.net/profile/A-Sajedul-Alam" target="_blank" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="ResearchGate profile with publications and research network">
+                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>ResearchGate</title><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.916-1.213 1.518-.244.602-.34 1.303-.34 2.004 0 .645.074 1.262.223 1.844.148.582.377 1.09.672 1.518.295.428.672.785 1.125 1.062.453.278.998.417 1.635.417.818 0 1.508-.19 2.073-.565.563-.377.97-.916 1.213-1.518.244-.602.34-1.303.34-2.004 0-.645-.074-1.262-.223-1.844-.148-.582-.377-1.09-.672-1.518-.295-.428-.672-.785-1.125-1.062C20.768.139 20.223 0 19.586 0zm-7.635 4.615c-.423 0-.791.12-1.105.36-.314.24-.557.548-.729.925-.172.377-.258.768-.258 1.173 0 .491.123.94.369 1.349.246.408.594.73 1.044.967.45.236.985.355 1.604.355.396 0 .747-.055 1.055-.166.307-.111.565-.276.773-.496.208-.22.365-.486.471-.797.106-.311.159-.656.159-1.035 0-.454-.081-.856-.244-1.207-.163-.351-.404-.624-.721-.821-.318-.196-.708-.294-1.169-.294-.294 0-.565.039-.821.117-.255.078-.478.185-.668.32l-.059-.902h-.942v4.916h1.049l-.059-.902c.19.135.413.242.668.32.256.078.527.117.821.117.461 0 .851-.098 1.169-.294.317-.197.558-.47.721-.821.163-.351.244-.753.244-1.207 0-.379-.053-.724-.159-1.035-.106-.311-.263-.577-.471-.797-.208-.22-.466-.385-.773-.496-.308-.111-.659-.166-1.055-.166z"/></svg>
+                        <span class="group-hover:matrix-text group-hover:underline">ResearchGate</span>
+                    </a>
                     <!-- Kaggle -->
                      <a href="https://www.kaggle.com/sajiduxd" target="_blank" class="social-icon-link group flex items-center text-gray-400 hover:text-white transition-all duration-300 magnetic-btn" data-preview="Data science competitions and machine learning projects on Kaggle">
                         <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Kaggle</title><path d="m15.352 1.34-5.32 8.7L4.76 1.34H.028l7.46 11.12L0 22.66h4.72l5.12-8.08 5.25 8.08h4.88L12.08 12.7l7.55-11.37z"/></svg>
@@ -601,6 +638,11 @@
                         <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                         <span class="group-hover:matrix-text group-hover:underline">Email</span>
                     </a>
+                    <!-- Phone -->
+                    <div class="group flex items-center text-gray-400 magnetic-btn">
+                        <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Phone</title><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span class="matrix-text">+880 1798-363798</span>
+                    </div>
                     <!-- Location -->
                     <div class="group flex items-center text-gray-400 magnetic-btn">
                         <svg class="w-5 h-5 mr-2 icon-path" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>Location</title><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -614,17 +656,19 @@
              <div class="section-container">
                 <div class="data-stream"></div>
                 <h2 class="text-3xl font-bold mb-6 matrix-text">PROFESSIONAL_SUMMARY.log</h2>
-                <p class="text-base leading-relaxed">
-                    Senior AI/ML Engineer with <span class="duration-highlight" id="summary-experience">4+ years</span> of leadership experience across international and local markets including Germany, and Bangladesh. Proven track record of scaling AI teams from 2 to 9 engineers while managing $800K+ R&D budgets and generating $2M+ business value through intelligent automation and enterprise AI deployment with extensive experience in on-site team management and stakeholder collaboration across enterprise environments.
+                <p class="text-base leading-relaxed mb-4">
+                    Senior AI/ML Engineer and Data Scientist with <span class="duration-highlight" id="summary-experience">4.5+ years</span> of leadership experience across international and local markets including Germany, and Bangladesh. Proven track record of scaling AI teams from 2 to 9 engineers while managing $800K+ R&D budgets and generating $2M+ business value through intelligent automation and enterprise AI deployment with extensive experience in on-site team management and stakeholder collaboration across enterprise environments.
                 </p>
                 <h3 class="text-xl font-bold mt-6 mb-4 matrix-text">Key Achievements:</h3>
-                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                <ul class="list-disc list-inside text-gray-400 space-y-2 mb-4">
                     <li>Led cross-functional ML teams with 95% project success rate.</li>
                     <li>Deployed 50+ enterprise AI solutions (90%+ accuracy) in banking, logistics, surveillance, e-commerce.</li>
                     <li>Built scalable systems processing 82 live streams across 18 locations.</li>
                     <li>Implemented tobacco leaf SOP checker across 60+ locations with 13 ML models.</li>
                     <li>Published peer-reviewed papers and presented at international conferences.</li>
                 </ul>
+                <h3 class="text-xl font-bold mt-6 mb-4 matrix-text">Industry Impact:</h3>
+                <p class="text-gray-400">Banking, FMCG, logistics, telecommunications, retail across Bangladesh, UAE, US, Germany, France, China, Australia with deep understanding of local market requirements.</p>
             </div>
         </section>
         <!-- Education Section -->
@@ -636,12 +680,43 @@
                      <div class="project-card">
                         <h3 class="text-xl font-bold text-white">Master of Science in Computer Science and Engineering</h3>
                         <p class="font-semibold matrix-text"><a href="https://www.bracu.ac.bd/" target="_blank" class="hover:underline magnetic-btn" data-preview="BRAC University - Leading private research university in Bangladesh">BRAC University</a>, <a href="https://www.bracu.ac.bd/academics/schools-and-departments/school-data-and-sciences" target="_blank" class="hover:underline magnetic-btn" data-preview="School of Data and Sciences - Premier computer science education">School of Data and Sciences</a> | Dhaka, Bangladesh</p>
-                        <p class="text-sm text-gray-400 mt-1">Thesis Ongoing | CGPA: 3.78/4.00 (Top 5%)</p>
+                        <p class="text-sm text-gray-400 mt-1 mb-2">Thesis Ongoing | Percentage: 85-90% (Top 5%, High Distinction) - Merit-Based Scholarship</p>
+                        <div class="mt-3">
+                            <h4 class="text-sm font-semibold matrix-text mb-2">Relevant Coursework:</h4>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="skill-tag">Symbolic Machine Learning A+</span>
+                                <span class="skill-tag">Advanced Syntactic Pattern Recognition A</span>
+                                <span class="skill-tag">Neural Networks & Fuzzy Systems A-</span>
+                                <span class="skill-tag">Mathematical Programming A-</span>
+                                <span class="skill-tag">Data Science B+</span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <h4 class="text-sm font-semibold matrix-text mb-2">Specialization:</h4>
+                            <p class="text-gray-400 text-sm">Computer Vision, Pattern Recognition, Natural Language Processing</p>
+                            <p class="text-gray-400 text-sm mt-1">Supervisor: Dr. Md. Golam Rabiul Alam, PhD (Kyung Hee University Alumni)</p>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3 class="text-xl font-bold text-white">Bachelor of Science in Computer Science</h3>
                         <p class="font-semibold matrix-text"><a href="https://www.bracu.ac.bd/" target="_blank" class="hover:underline magnetic-btn" data-preview="BRAC University - Leading private research university in Bangladesh">BRAC University</a>, <a href="https://www.bracu.ac.bd/academics/schools-and-departments/school-data-and-sciences" target="_blank" class="hover:underline magnetic-btn" data-preview="School of Data and Sciences - Premier computer science education">School of Data and Sciences</a> | Dhaka, Bangladesh</p>
-                        <p class="text-sm text-gray-400 mt-1">Graduated 2019</p>
+                        <p class="text-sm text-gray-400 mt-1 mb-2">Graduated 2019 | Percentage: 70-75%</p>
+                        <div class="mt-3">
+                            <h4 class="text-sm font-semibold matrix-text mb-2">Relevant Coursework:</h4>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="skill-tag">Project & Thesis A</span>
+                                <span class="skill-tag">Discrete Mathematics A-</span>
+                                <span class="skill-tag">Data Structures A-</span>
+                                <span class="skill-tag">Tensor Calculus A-</span>
+                                <span class="skill-tag">Mathematical Physics A-</span>
+                                <span class="skill-tag">General Theory of Relativity A-</span>
+                                <span class="skill-tag">Machine Learning B+</span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-gray-400 text-sm">Thesis: Machine Learning Approach to Credit Default Prediction achieving 89% accuracy</p>
+                            <p class="text-gray-400 text-sm mt-1">Supervisor: Dr. Mahbubul Alam Majumdar, PhD (Stanford, Cambridge, MIT, Imperial College Alumni)</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -652,7 +727,7 @@
                 <div class="data-stream"></div>
                 <h2 class="text-3xl font-bold mb-8 matrix-text">PROFESSIONAL_EXPERIENCE.dat</h2>
                 <div class="mb-6 text-center">
-                    <p class="text-lg matrix-text">Total Experience: <span class="duration-highlight text-2xl" id="calculated-experience">4+ years</span></p>
+                    <p class="text-lg matrix-text">Total Experience: <span class="duration-highlight text-2xl" id="calculated-experience">4.5+ years</span></p>
                 </div>
                 <div class="space-y-12">
                     <!-- Experience Item -->
@@ -662,10 +737,19 @@
                         <h3 class="text-xl font-bold text-white">Team Lead, ML Research Engineer II</h3>
                         <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline magnetic-btn" data-preview="Bondstein Technologies - Leading AI/ML solutions provider">Bondstein Technologies Ltd.</a> (<a href="https://www.runnerbd.com/runner-group/" target="_blank" class="hover:underline magnetic-btn" data-preview="Runner Group - Major business conglomerate in Bangladesh">Runner Group</a>) | Dhaka, Bangladesh</p>
                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Led cross-functional AI/ML team of 9 engineers with 95% project success rate.</li>
-                            <li>Managed R&D budgets for AI infrastructure and edge devices.</li>
-                            <li>Deployed AI monitoring system processing 82 live camera streams across 18 locations.</li>
-                            <li>Architected multi-modal AI systems integrating LLAVA, LLAMA, and YOLO models.</li>
+                            <li>Led cross-functional AI/ML team of 9 engineers with 95% project success rate, managing sprint planning and strategic road maps.</li>
+                            <li>Managed R&D budgets for AI infrastructure, processing units, and edge devices across multiple enterprise projects.</li>
+                            <li>Involved in client meetings for feasibility analysis of required features and designed long-term planning for product maintenance after deployment.</li>
+                            <li>Monitored team progress through sprints, one-to-one mentoring sessions, code reviews, and provided resources for new and existing projects.</li>
+                            <li>Developed and deployed scalable, real-time forecasting models for user behavior and sales on Azure Container Apps with benchmark-low prediction errors.</li>
+                            <li>Fine-tuned and integrated large vision-language models on Azure NC24A100 VMs to build advanced reasoning systems with computer vision, speech, and NLP capabilities.</li>
+                            <li>Designed and deployed custom AI monitoring system processing 82 live camera streams across 18 locations with 94.5% accuracy for theft detection.</li>
+                            <li>Built comprehensive surveillance system for leading private bank featuring audio detection and violence recognition.</li>
+                            <li>Implemented tobacco leaf SOP checker across 60+ locations using 13 ML custom models trained on 10K+ annotated images.</li>
+                            <li>Developed hybrid NLP engine achieving 98% accuracy for data quality classification with automated retraining.</li>
+                            <li>Created container tracking solution with Multimodal OCR approach using YOLO and PaddleOCR deployed on NVIDIA Jetson Nano & Nano Super with model optimization.</li>
+                            <li>Architected multi-modal AI systems integrating LLAVA, LLAMA, and YOLO models achieving 92-97% accuracy for Azure edge deployment.</li>
+                            <li>Delivered custom computer vision solutions for drone deployment with edge computing optimization.</li>
                         </ul>
                     </div>
                      <!-- Experience Item -->
@@ -675,9 +759,9 @@
                         <h3 class="text-xl font-bold text-white">ML Research Engineer I</h3>
                         <p class="font-semibold matrix-text"><a href="https://bondstein.com/" target="_blank" class="hover:underline magnetic-btn" data-preview="Bondstein Technologies - Leading AI/ML solutions provider">Bondstein Technologies Ltd.</a> | Dhaka, Bangladesh</p>
                          <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Built intelligent parking system achieving 95.47% number plate recognition.</li>
-                            <li>Developed Driver Monitoring System presented at BASIS SoftExpo 2023.</li>
-                            <li>Designed TV habit monitoring solution with 98.23% accuracy for consumer behavior analysis.</li>
+                            <li>Built intelligent parking system achieving 95.47% number plate recognition and 97.12% occupancy detection accuracy.</li>
+                            <li>Developed Driver Monitoring System with 94.61% DMS and 96.32% ADAS accuracy, presented at BASIS SoftExpo 2023.</li>
+                            <li>Designed TV habit monitoring solution with 98.23% accuracy for consumer behavior analysis, deployed on edge device with model optimization and delivered as consumer ready product.</li>
                         </ul>
                     </div>
                     <!-- Experience Item -->
@@ -685,11 +769,12 @@
                         <div class="timeline-dot"></div>
                         <p class="text-sm text-gray-400">Feb 2022 - Dec 2022 <span class="duration-highlight">(11 months)</span></p>
                         <h3 class="text-xl font-bold text-white">Lead AI Engineer</h3>
-                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline magnetic-btn" data-preview="eaaasy - German AI startup focused on intelligent automation">eaaasy</a> (<a href="https://staffus.zohorecruit.eu/jobs/Careers" target="_blank" class="hover:underline magnetic-btn" data-preview="staffus GmbH - Technology consulting and recruitment company">staffus GmbH</a>) | Munich, Germany (Remote)</p>
+                        <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline magnetic-btn" data-preview="eaaasy - German AI startup focused on intelligent automation">eaaasy</a> (<a href="https://lookaround.gmbh/" target="_blank" class="hover:underline magnetic-btn" data-preview="lookaround GmbH - Technology consulting and recruitment company">lookaround GmbH</a>) | Munich, Germany (Remote)</p>
                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Led AI team of 5 engineers for MVP development and technical recruitment.</li>
-                            <li>Developed real-time brand logo detection using YOLOv5 (96.71% accuracy).</li>
-                            <li>Deployed ML models on AWS and GCP using Docker and CI/CD pipelines.</li>
+                            <li>Led AI team of 5 engineers for MVP development, participating in strategic planning and technical recruitment.</li>
+                            <li>Developed real-time brand logo detection using YOLOv5 achieving 96.71% accuracy for e-commerce applications.</li>
+                            <li>Implemented acoustic fingerprinting algorithms for advertisement detection with custom audio processing.</li>
+                            <li>Deployed ML models on AWS and GCP using Docker containerization and CI/CD pipelines.</li>
                         </ul>
                     </div>
                      <!-- Experience Item -->
@@ -699,8 +784,8 @@
                         <h3 class="text-xl font-bold text-white">AI Engineer</h3>
                         <p class="font-semibold matrix-text"><a href="https://www.eaaasy.de/" target="_blank" class="hover:underline magnetic-btn" data-preview="eaaasy - German AI startup focused on intelligent automation">eaaasy</a> | Munich, Germany (Remote)</p>
                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Created four end-to-end recommendation systems using content-based and collaborative filtering.</li>
-                            <li>Deployed systems using Flask, Google Cloud Run, and Docker.</li>
+                            <li>Created four end-to-end recommendation systems using content-based and collaborative filtering approaches.</li>
+                            <li>Deployed systems using Flask, Google Cloud Run, and Docker with comprehensive documentation.</li>
                         </ul>
                     </div>
                     <!-- Experience Item -->
@@ -710,8 +795,8 @@
                         <h3 class="text-xl font-bold text-white">IT Project Manager & Business Intelligence Analyst</h3>
                         <p class="font-semibold matrix-text"><a href="https://ecomclips.com/" target="_blank" class="hover:underline magnetic-btn" data-preview="Ecomclips - E-commerce development and digital marketing agency">Ecomclips</a> | Dhaka, Bangladesh</p>
                         <ul class="mt-4 list-disc list-inside text-gray-400 space-y-1">
-                            <li>Managed multi-platform e-commerce projects across Shopify and WooCommerce.</li>
-                            <li>Implemented analytics solutions using Tableau and Power BI for performance monitoring.</li>
+                            <li>Managed multi-platform e-commerce projects across Shopify and WooCommerce, coordinating cross-functional teams.</li>
+                            <li>Implemented analytics solutions using Tableau and Power BI for performance monitoring and sales forecasting.</li>
                         </ul>
                     </div>
                 </div>
@@ -743,25 +828,44 @@
                             <span class="skill-tag">Scikit-learn</span>
                             <span class="skill-tag">Hugging Face</span>
                             <span class="skill-tag">YOLO</span>
+                            <span class="skill-tag">LLAMA</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="font-bold text-white mb-3">Web Frameworks:</h3>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">Streamlit</span>
                         </div>
                     </div>
                     <div class="project-card">
                         <h3 class="font-bold text-white mb-3">Computer Vision:</h3>
                         <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">CNNs</span>
+                            <span class="skill-tag">Transformers</span>
+                            <span class="skill-tag">Paddle OCR</span>
                             <span class="skill-tag">LLAVA</span>
                             <span class="skill-tag">OpenCV</span>
                             <span class="skill-tag">Object Detection</span>
                             <span class="skill-tag">Image Classification</span>
+                            <span class="skill-tag">Transfer Learning</span>
+                            <span class="skill-tag">Knowledge Distillation</span>
                         </div>
                     </div>
                     <div class="project-card">
                         <h3 class="font-bold text-white mb-3">NLP & LLMs:</h3>
                         <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">RNNs</span>
                             <span class="skill-tag">BERT</span>
                             <span class="skill-tag">GPT</span>
+                            <span class="skill-tag">Claude</span>
+                            <span class="skill-tag">Gemini</span>
                             <span class="skill-tag">spaCy</span>
                             <span class="skill-tag">NLTK</span>
-                            <span class="skill-tag">LLAMA</span>
+                            <span class="skill-tag">Sentiment Analysis</span>
+                            <span class="skill-tag">Recommendation Systems</span>
                         </div>
                     </div>
                     <div class="project-card">
@@ -773,6 +877,9 @@
                             <span class="skill-tag">Docker</span>
                             <span class="skill-tag">Kubernetes</span>
                             <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">mlflow</span>
+                            <span class="skill-tag">Grafana</span>
+                            <span class="skill-tag">Prometheus</span>
                         </div>
                     </div>
                     <div class="project-card">
@@ -787,12 +894,25 @@
                         </div>
                     </div>
                     <div class="project-card">
+                        <h3 class="font-bold text-white mb-3">Time Series:</h3>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">ARIMA</span>
+                            <span class="skill-tag">ARIMAX</span>
+                            <span class="skill-tag">SARIMA</span>
+                            <span class="skill-tag">Prophet</span>
+                            <span class="skill-tag">LSTM</span>
+                            <span class="skill-tag">Random Forest</span>
+                            <span class="skill-tag">Exponential Smoothing</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
                         <h3 class="font-bold text-white mb-3">Databases:</h3>
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">PostgreSQL</span>
                             <span class="skill-tag">MySQL</span>
                             <span class="skill-tag">MongoDB</span>
                             <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">nginx</span>
                         </div>
                     </div>
                     <div class="project-card">
@@ -800,7 +920,20 @@
                         <div class="flex flex-wrap gap-1">
                             <span class="skill-tag">ONNX</span>
                             <span class="skill-tag">Model Quantization</span>
+                            <span class="skill-tag">Model Pruning</span>
                             <span class="skill-tag">NVIDIA Jetson</span>
+                            <span class="skill-tag">Raspberry Pi</span>
+                            <span class="skill-tag">On-premise Deployment</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="font-bold text-white mb-3">Operating Systems:</h3>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">Ubuntu</span>
+                            <span class="skill-tag">Windows</span>
+                            <span class="skill-tag">Android</span>
+                            <span class="skill-tag">Raspberry Pi OS</span>
+                            <span class="skill-tag">Jetson Linux</span>
                         </div>
                     </div>
                 </div>
@@ -877,27 +1010,35 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="project-card magnetic-btn">
                         <h3 class="text-xl font-bold text-white">AI Surveillance for Financial Institution</h3>
-                        <p class="text-gray-400 mt-2">Developed a system featuring Bangla aggressive audio detection, custom object/face recognition, and violence detection integrated with real-time notifications.</p>
+                        <p class="text-gray-400 mt-2">Developed a comprehensive surveillance system featuring Bangla aggressive audio detection, custom object/face recognition, and violence detection integrated with real-time notifications for leading private bank.</p>
                     </div>
                     <div class="project-card magnetic-btn">
                         <h3 class="text-xl font-bold text-white">Automated Lip Sync & Voice Cloning Campaign</h3>
-                        <p class="text-gray-400 mt-2">Designed and deployed a complete pipeline leveraging multiple APIs and cloud resources to deliver over 6,600 personalized, lip-synced videos for a large-scale campaign.</p>
+                        <p class="text-gray-400 mt-2">Designed and deployed a complete pipeline leveraging multiple APIs and cloud resources to deliver over 6,600 personalized, lip-synced videos for a large-scale campaign within 4 days.</p>
                     </div>
                     <div class="project-card magnetic-btn">
                         <h3 class="text-xl font-bold text-white">Tobacco Leaf SOP Checker</h3>
-                        <p class="text-gray-400 mt-2">Architected a system with 13 custom classification/detection models deployed across more than 40 sites to ensure compliance with standard operating procedures.</p>
+                        <p class="text-gray-400 mt-2">Architected a system with 13 custom classification/detection models trained on 10K+ annotated images, deployed across 60+ sites to ensure compliance with standard operating procedures.</p>
                     </div>
                     <div class="project-card magnetic-btn">
                         <h3 class="text-xl font-bold text-white">Real-Time Face Recognition Monitoring</h3>
-                        <p class="text-gray-400 mt-2">Developed a Siamese network with YOLOv8 for real-time face detection and recognition, optimized for extended operation in high-traffic environments.</p>
+                        <p class="text-gray-400 mt-2">Developed a Siamese network with YOLOv8 for real-time face detection and recognition, optimized for extended operation in high-traffic environments with 94.5% accuracy.</p>
                     </div>
                     <div class="project-card magnetic-btn">
                         <h3 class="text-xl font-bold text-white">Predictive Analytics for Production & Network</h3>
-                        <p class="text-gray-400 mt-2">Implemented regression and ML models for production forecasting and network data analysis, delivering detailed performance reports.</p>
+                        <p class="text-gray-400 mt-2">Implemented regression and ML models for production forecasting and network data analysis using time series techniques, delivering detailed performance reports with benchmark-low prediction errors.</p>
                     </div>
                      <div class="project-card magnetic-btn">
                         <h3 class="text-xl font-bold text-white">Human Crowd Monitoring & Smart Parking</h3>
-                        <p class="text-gray-400 mt-2">Built fusion models for crowd tracking and smart parking systems, achieving high detection accuracies of 97% and 95%, respectively.</p>
+                        <p class="text-gray-400 mt-2">Built fusion models for crowd tracking and intelligent parking systems, achieving high detection accuracies of 97.12% for occupancy detection and 95.47% for number plate recognition.</p>
+                    </div>
+                    <div class="project-card magnetic-btn">
+                        <h3 class="text-xl font-bold text-white">Driver Monitoring System (DMS)</h3>
+                        <p class="text-gray-400 mt-2">Developed advanced DMS with 94.61% accuracy and ADAS with 96.32% accuracy, optimized for edge deployment and presented at BASIS SoftExpo 2023.</p>
+                    </div>
+                    <div class="project-card magnetic-btn">
+                        <h3 class="text-xl font-bold text-white">TV Habit Monitoring Solution</h3>
+                        <p class="text-gray-400 mt-2">Created consumer behavior analysis system with 98.23% accuracy for TV viewing patterns, deployed as edge-optimized consumer-ready product for market research applications.</p>
                     </div>
                 </div>
             </div>
@@ -911,25 +1052,25 @@
                     <!-- Project 1 -->
                     <div class="project-card">
                         <h3 class="text-xl font-bold text-white">Enterprise CCTV Face Extraction</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Utilized Multi-Task Cascaded Convolutional Neural Networks (MTCNN) and OpenCV for high-accuracy face extraction from surveillance footage.</p>
+                        <p class="text-gray-400 mt-2 mb-4">Utilized Multi-Task Cascaded Convolutional Neural Networks (MTCNN) and OpenCV for high-accuracy face extraction from surveillance footage with optimized performance for enterprise environments.</p>
                         <a href="https://github.com/anmsajedulalam/Extracting-faces-from-cc-footage-using-Multi-Task-Cascaded-Convolutional-Neural-Networks-and-OpenCV" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository featuring MTCNN implementation for CCTV face extraction">ACCESS_SOURCE ></a>
                     </div>
                     <!-- Project 2 -->
                     <div class="project-card">
                         <h3 class="text-xl font-bold text-white">Healthcare EHR Classification Pipeline</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Developed a robust pipeline for classifying patient severity states from Electronic Health Record (EHR) data using ML and Deep Learning.</p>
+                        <p class="text-gray-400 mt-2 mb-4">Developed a robust pipeline for classifying patient severity states from Electronic Health Record (EHR) data using multiple ML and Deep Learning approaches with comprehensive evaluation metrics.</p>
                         <a href="https://github.com/anmsajedulalam/Patients-Severity-States-Classification-based-on-EHR-Data-using-Multiple-Machine-and-Deep-Learning" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for EHR classification using ML and DL">ACCESS_SOURCE ></a>
                     </div>
                     <!-- Project 3 -->
                     <div class="project-card">
                         <h3 class="text-xl font-bold text-white">Generative AI Image Systems</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Built an Img2Img generator using Stable Diffusion with Diffusers from Hugging Face, exploring advanced generative capabilities.</p>
+                        <p class="text-gray-400 mt-2 mb-4">Built an Img2Img generator using Stable Diffusion with Diffusers from Hugging Face, exploring advanced generative capabilities and custom fine-tuning techniques.</p>
                         <a href="https://github.com/anmsajedulalam/Img2Img-Generator-using-Stable-Diffusion-with-Diffusers-from-Hugging-Face" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for Stable Diffusion Img2Img generator">ACCESS_SOURCE ></a>
                     </div>
                     <!-- Project 4 -->
                     <div class="project-card">
                         <h3 class="text-xl font-bold text-white">PDF Resume Data Extraction</h3>
-                        <p class="text-gray-400 mt-2 mb-4">Created a system for automatically parsing and extracting structured information from resumes in PDF format.</p>
+                        <p class="text-gray-400 mt-2 mb-4">Created an intelligent system for automatically parsing and extracting structured information from resumes in PDF format using NLP and document processing techniques.</p>
                         <a href="https://github.com/anmsajedulalam/Data-Extraction-from-PDF-files-of-Resume" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for PDF resume data extraction">ACCESS_SOURCE ></a>
                     </div>
                 </div>
@@ -940,12 +1081,87 @@
              <div class="section-container">
                 <div class="data-stream"></div>
                 <h2 class="text-3xl font-bold mb-8 matrix-text">PUBLICATIONS_ARCHIVE.dat</h2>
-                <div class="space-y-4">
-                    <p><strong class="text-white">Comparison of Multiple Machine Learning Approaches in Spam Detection</strong> - <a href="https://link.springer.com/chapter/10.1007/978-3-031-12638-3_4" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="Springer Nature publication on spam detection using ML">Springer Nature (ICACDS 2022)</a></p>
-                    <p><strong class="text-white">Implementation of Explainable AI in Mental Health Informatics</strong> - <a href="https://ieeexplore.ieee.org/document/10088765" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="IEEE publication on explainable AI in mental health">IEEE ICECE 2022</a></p>
-                    <p><strong class="text-white">Patients' Severity States Classification using ML & DL Approaches</strong> - <a href="https://arxiv.org/abs/2209.14907" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="arXiv paper on patient severity classification">arXiv:2209.14907</a></p>
-                    <p><strong class="text-white">A Machine Learning Approach to Credit Default Prediction</strong> - <a href="http://dspace.bracu.ac.bd/xmlui/handle/10361/10956" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="Undergraduate thesis on credit default prediction">Undergraduate Thesis</a></p>
-                    <p><strong class="text-white">A Survey: Implementations of NFT System in Different Fields</strong> - <a href="https://arxiv.org/abs/2209.15288" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="arXiv survey on NFT implementations">arXiv:2209.15288</a></p>
+                <div class="space-y-6">
+                    <div class="project-card">
+                        <h3 class="text-lg font-bold text-white mb-2">Comparison of Multiple Machine Learning Approaches in Spam Detection</h3>
+                        <p class="text-gray-400 mb-2"><strong class="matrix-text">First Author</strong> - <a href="https://link.springer.com/chapter/10.1007/978-3-031-12638-3_4" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="Springer Nature publication on spam detection using ML">Springer Nature Book Chapter (ICACDS 2022)</a></p>
+                        <p class="text-sm text-gray-500">Comprehensive comparison of ML algorithms for email spam detection with performance analysis and optimization techniques.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-lg font-bold text-white mb-2">Implementation of Explainable AI in Mental Health Informatics</h3>
+                        <p class="text-gray-400 mb-2"><strong class="matrix-text">Co-Author</strong> - <a href="https://ieeexplore.ieee.org/document/10088765" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="IEEE publication on explainable AI in mental health">IEEE ICECE 2022</a></p>
+                        <p class="text-sm text-gray-500">Research on implementing explainable AI techniques for mental health diagnosis and treatment recommendations.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-lg font-bold text-white mb-2">Patients' Severity States Classification using ML & DL Approaches</h3>
+                        <p class="text-gray-400 mb-2"><strong class="matrix-text">First Author</strong> - <a href="https://arxiv.org/abs/2209.14907" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="arXiv paper on patient severity classification">arXiv:2209.14907</a> & <a href="https://github.com/anmsajedulalam/Patients-Severity-States-Classification-based-on-EHR-Data-using-Multiple-Machine-and-Deep-Learning" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="GitHub repository for patient severity classification">GitHub</a></p>
+                        <p class="text-sm text-gray-500">Novel approach to classify patient severity using multiple machine learning and deep learning techniques with EHR data.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-lg font-bold text-white mb-2">A Machine Learning Approach to Credit Default Prediction</h3>
+                        <p class="text-gray-400 mb-2"><strong class="matrix-text">Undergraduate Thesis</strong> - <a href="http://dspace.bracu.ac.bd/xmlui/handle/10361/10956" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="Undergraduate thesis on credit default prediction">BRAC University Digital Repository</a></p>
+                        <p class="text-sm text-gray-500">Comprehensive study achieving 89% accuracy in credit default prediction using advanced ML algorithms and feature engineering.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-lg font-bold text-white mb-2">A Survey: Implementations of NFT System in Different Fields</h3>
+                        <p class="text-gray-400 mb-2"><strong class="matrix-text">First Author</strong> - <a href="https://arxiv.org/abs/2209.15288" target="_blank" class="matrix-text hover:underline interactive-btn magnetic-btn" data-preview="arXiv survey on NFT implementations">arXiv:2209.15288</a></p>
+                        <p class="text-sm text-gray-500">Comprehensive survey of NFT implementations across various industries with technical analysis and future prospects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Awards & Recognition Section -->
+        <section id="awards" class="py-20 section-fade-in">
+            <div class="section-container">
+                <div class="data-stream"></div>
+                <h2 class="text-3xl font-bold mb-8 matrix-text">AWARDS_AND_RECOGNITION.dat</h2>
+                <div class="space-y-6">
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-white mb-4">Professional Recognition</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <span class="award-badge">2024</span>
+                                <p class="text-gray-300 ml-3">Best Team of the Quarter - Bondstein Technologies, R&D Department</p>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="award-badge">2023</span>
+                                <p class="text-gray-300 ml-3">Best Employee of the Quarter - Bondstein Technologies, Technical Excellence</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-white mb-4">Academic Excellence</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <span class="award-badge">2022</span>
+                                <p class="text-gray-300 ml-3">Merit-Based Scholarship - BRAC University (Top 5% Academic Performance)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 section-fade-in">
+            <div class="section-container">
+                <div class="data-stream"></div>
+                <h2 class="text-3xl font-bold mb-8 matrix-text">CERTIFICATIONS_AND_TRAINING.dat</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-white mb-4">AI & Business Strategy</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="cert-tag">Generative AI for Business Leaders</span>
+                            <span class="cert-tag">AI & Business Strategy</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="text-xl font-bold text-white mb-4">Machine Learning & Data Science</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="cert-tag">Supervised Learning with Scikit-learn</span>
+                            <span class="cert-tag">Time Series Analysis in Python</span>
+                            <span class="cert-tag">Data Visualization with Seaborn</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -964,7 +1180,7 @@
         // Calculate Total Experience
         function calculateTotalExperience() {
             // Jul 2023 - Jun 2025: 2 years
-            // Jan 2023 - Jun 2023: 0.5 years
+            // Jan 2023 - Jun 2023: 0.5 years  
             // Feb 2022 - Dec 2022: 11 months (~0.92 years)
             // Jul 2021 - Jan 2022: 7 months (~0.58 years)
             // Jan 2021 - Jun 2021: 6 months (0.5 years)
